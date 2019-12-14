@@ -1,0 +1,50 @@
+<ns-actionbar></ns-actionbar>
+<!-- No Session -->
+<StackLayout class="top_layout" *ngIf="!(currentSession$ | async)">
+    <Label text="Welcome press the button to start your session!"></Label>
+    <Button class="session-btn" text="Start Session" (tap)="startSessionTap()"></Button>
+</StackLayout>
+
+<!-- Has Current Session -->
+<GridLayout class="top_layout" rows="auto, *" *ngIf="currentSession$ | async; let session">
+    <StackLayout row="0">
+        <StackLayout orientation="horizontal">
+            <Label text="Session time: " ></Label>
+            <Label [text]="timerService.time | async"></Label>
+        </StackLayout>
+        <StackLayout *ngIf="currentTotals$ | async; let totals">
+            <Label [text]="'Wins: ' + totals.wins"></Label>
+            <Label [text]="'Ties: ' + totals.ties"></Label>
+            <Label [text]="'Losts: ' + totals.losts"></Label>
+            <Label [text]="'Quit: ' + totals.quit"></Label>
+        </StackLayout>
+        <Button class='session-btn' text="End Session" (tap)="endSessionTap()"></Button>
+        <GridLayout columns="*, *, *, *" rows="100, 60">
+            <Button class="win" col="0" colSpan="2" row="0" text="Win" (tap)="gameFinished(gameResult.Win)"></Button>
+            <Button class="lose" col="2" colSpan="2" row="0" text="Lose" (tap)="gameFinished(gameResult.Lost)"></Button>
+            <Button col="0" colSpan="2" row="1" text="Tie" (tap)="gameFinished(gameResult.Tie)"></Button>
+            <Button col="2" colSpan="2" row="1" text="Quit" (tap)="gameFinished(gameResult.Quit)"></Button>
+        </GridLayout>
+    </StackLayout>
+    <GridLayout rows="auto, auto *" row="1">
+        <GridLayout row="0" height="25" columns="*, *, *, *, *">
+            <Label col="0" text="Result"></Label>
+            <Label col="1" text="Kills"></Label>
+            <Label col="2" text="Deaths"></Label>
+            <Label col="3" text="K/D"></Label>
+            <Label col="4" text="Time"></Label>
+        </GridLayout>
+        <StackLayout row="1" height="1" backgroundColor="gray"></StackLayout>
+        <ListView row="2" [items]="session.games">
+            <ng-template let-game="item" let-i="index" let-odd="odd" let-even="even">
+                <GridLayout columns="*, *, *, *, *">
+                    <Label col="0" [text]="gameResult[game.result]"></Label>
+                    <Label col="1" [text]="game.kills"></Label>
+                    <Label col="2" [text]="game.deaths"></Label>
+                    <Label col="3" [text]="getKD(game.kills, game.deaths)"></Label>
+                    <Label col="4" [text]="game.time | date: 'shortTime'"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </GridLayout>
+</GridLayout>

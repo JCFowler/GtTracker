@@ -1,0 +1,26 @@
+.top_layout {
+    Label {
+        font-size: 18;
+    }
+
+    Button {
+        height: 80;
+        color: black;
+        margin: 2;
+        background-color: #D7D7D7;
+        font-size: 18;
+    }
+
+    .session-btn {
+        color: white;
+        background-color: #3A53FF;
+    }
+
+    .win {
+        background-color: #06CE6A;
+    }
+    
+    .lose {
+        background-color: #D84039;
+    }
+}
