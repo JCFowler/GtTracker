@@ -1,4 +1,4 @@
-<ns-actionbar></ns-actionbar>
+<ns-actionbar title="Home"></ns-actionbar>
 <!-- No Session -->
 <StackLayout class="top_layout" *ngIf="!(currentSession$ | async)">
     <Label text="Welcome press the button to start your session!"></Label>
@@ -12,12 +12,11 @@
             <Label text="Session time: " ></Label>
             <Label [text]="timerService.time | async"></Label>
         </StackLayout>
-        <StackLayout *ngIf="currentTotals$ | async; let totals">
-            <Label [text]="'Wins: ' + totals.wins"></Label>
-            <Label [text]="'Ties: ' + totals.ties"></Label>
-            <Label [text]="'Losts: ' + totals.losts"></Label>
-            <Label [text]="'Quit: ' + totals.quit"></Label>
-        </StackLayout>
+        <Label [text]="'Games: ' + session.totals.games"></Label>
+        <Label [text]="'Wins: ' + session.totals.wins"></Label>
+        <Label [text]="'Ties: ' + session.totals.ties"></Label>
+        <Label [text]="'Losts: ' + session.totals.losts"></Label>
+        <Label [text]="'Quit: ' + session.totals.quit"></Label>
         <Button class='session-btn' text="End Session" (tap)="endSessionTap()"></Button>
         <GridLayout columns="*, *, *, *" rows="100, 60">
             <Button class="win" col="0" colSpan="2" row="0" text="Win" (tap)="gameFinished(gameResult.Win)"></Button>
@@ -41,7 +40,7 @@
                     <Label col="0" [text]="gameResult[game.result]"></Label>
                     <Label col="1" [text]="game.kills"></Label>
                     <Label col="2" [text]="game.deaths"></Label>
-                    <Label col="3" [text]="getKD(game.kills, game.deaths)"></Label>
+                    <Label col="3" [text]="getRatio(game.kills, game.deaths)"></Label>
                     <Label col="4" [text]="game.time | date: 'shortTime'"></Label>
                 </GridLayout>
             </ng-template>

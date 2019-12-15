@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import * as app from 'tns-core-modules/application';
+import { RouterHelper } from '~/app/logic/helpers';
 
 @Component({
   selector: 'ns-actionbar',
@@ -9,13 +10,22 @@ import * as app from 'tns-core-modules/application';
 })
 export class ActionbarComponent implements OnInit {
 
-  constructor() {}
+  @Input() title: string;
+  @Input() showBack = false;
 
-  ngOnInit() {}
+  constructor(private routerHelper: RouterHelper) {}
+
+  ngOnInit() {
+    console.log(this.showBack)
+  }
 
   onDrawerButtonTap(): void {
     const sideDrawer = <RadSideDrawer>app.getRootView();
     sideDrawer.showDrawer();
+  }
+
+  onAndroidBack() {
+    this.routerHelper.backToPreviousPage();
   }
 
 }

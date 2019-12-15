@@ -2,13 +2,12 @@ import { State, Selector, StateContext, Store } from '@ngxs/store';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { LocalStorage } from '../storage/local-storage';
 import { Session } from '../models/session.model';
-import { Game, Totals } from '../models';
+import { Game } from '../models';
 import { GameResult } from '../enums';
 
 export interface AppStateModel {
     user: any;
     currentSession: Session;
-    currentTotals: Totals;
     sessionHistory: Session[];
 }
 
@@ -16,7 +15,6 @@ export interface AppStateModel {
     name: 'appData',
     defaults: {
         user: undefined,
-        currentTotals: new Totals(),
         currentSession: undefined,
         sessionHistory: []
     },
@@ -24,17 +22,11 @@ export interface AppStateModel {
 
 
 export class AppState {
-    constructor() {
-    }
+    constructor() {}
 
     @Selector()
     public static getCurrentSession(state: AppStateModel) {
         return state.currentSession;
-    }
-
-    @Selector()
-    public static getCurrentTotals(state: AppStateModel) {
-        return state.currentTotals;
     }
 
     @Selector()
@@ -54,30 +46,30 @@ export class AppState {
     @Receiver()
     public static async updateCurrentSessionGame(ctx: StateContext<AppStateModel>, action: EmitterAction<Game>) {
         const session = ctx.getState().currentSession;
-        const totals = ctx.getState().currentTotals;
+
+        session.totals.games++;
 
         switch (action.payload.result) {
             case GameResult.Win:
-                totals.wins++;
+                session.totals.wins++;
                 break;
             case GameResult.Tie:
-                totals.ties++;
+                session.totals.ties++;
                 break;
             case GameResult.Lost:
-                totals.losts++;
+                session.totals.losts++;
                 break;
             case GameResult.Quit:
-                totals.quit++;
+                session.totals.quit++;
                 break;
             default:
                 break;
         }
 
-        session.games.push(action.payload);
+        session.games.unshift(action.payload);
 
         ctx.patchState({
-            currentSession: session,
-            currentTotals: totals
+            currentSession: session
         });
         LocalStorage.setAppState(ctx.getState());
     }
@@ -86,11 +78,13 @@ export class AppState {
     public static async addSessionToHistory(ctx: StateContext<AppStateModel>) {
         const currentSession = ctx.getState().currentSession;
         const history = ctx.getState().sessionHistory;
-        history.push(currentSession);
+
+        currentSession.endTime = new Date();
+
+        history.unshift(currentSession);
 
         ctx.patchState({
             currentSession: undefined,
-            currentTotals: new Totals,
             sessionHistory: history
         });
         LocalStorage.setAppState(ctx.getState());
@@ -105,7 +99,6 @@ export class AppState {
             ctx.setState({
                 user: undefined,
                 currentSession: state.currentSession,
-                currentTotals: state.currentTotals,
                 sessionHistory: state.sessionHistory
             });
         }

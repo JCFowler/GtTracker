@@ -1,0 +1,29 @@
+<ns-actionbar title="History"></ns-actionbar>
+<StackLayout *ngIf="history$ | async; let history">
+    <!-- Has history -->
+    <GridLayout *ngIf="history.length > 0">
+        <ListView [items]="history" (itemTap)="onItemTap($event)">
+            <ng-template let-session="item" let-i="index" let-odd="odd" let-even="even">
+                <GridLayout columns="*, *, *, 2*" rows="*, *" height="50">
+                    <Label col="0" row="0" text="Games"></Label>
+                    <Label col="0" row="1" [text]="session.totals.games"></Label>
+
+                    <Label col="1" row="0" text="W/L"></Label>
+                    <Label col="1" row="1" [text]="getRatio(session.totals.wins, session.totals.losts)"></Label>
+
+                    <Label col="2" row="0" text="Time Played"></Label>
+                    <Label col="2" row="1" [text]="getTimeDiff(session.startTime, session.endTime)"></Label>
+
+                    <Label col="3" row="0" text="Date"></Label>
+                    <Label col="3" row="1" [text]="session.startTime | date: 'E, M/d/yy'"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </GridLayout>
+
+    <!-- No history -->
+    <StackLayout *ngIf="history.length === 0">
+        <Label text="No history yet!"></Label>
+        <Button text="Go to Home To start your first session!" (tap)="noHistoryTap()"></Button>
+    </StackLayout>
+</StackLayout>

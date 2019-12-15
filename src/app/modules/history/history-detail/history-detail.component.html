@@ -1,0 +1,14 @@
+<ns-actionbar title="History" [showBack]="true"></ns-actionbar>
+<GridLayout columns="*, *, *, 2*" rows="*, *" height="50">
+    <Label col="0" row="0" text="Games"></Label>
+    <Label col="0" row="1" [text]="session.totals.games"></Label>
+
+    <Label col="1" row="0" text="W/L"></Label>
+    <Label col="1" row="1" [text]="getRatio(session.totals.wins, session.totals.losts)"></Label>
+
+    <Label col="2" row="0" text="Time Played"></Label>
+    <Label col="2" row="1" [text]="getTimeDiff(session.startTime, session.endTime)"></Label>
+
+    <Label col="3" row="0" text="Date"></Label>
+    <Label col="3" row="1" [text]="session.startTime | date: 'E, M/d/yy'"></Label>
+</GridLayout>

@@ -24,9 +24,7 @@ export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
-        // Use the component constructor to inject services.
-    }
+    constructor(private router: Router, private routerExtensions: RouterExtensions) {}
 
     ngOnInit(): void {
         this._activatedUrl = '/home';
@@ -55,7 +53,8 @@ export class AppComponent implements OnInit {
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
                 name: 'fade'
-            }
+            },
+            clearHistory: true
         });
 
         const sideDrawer = <RadSideDrawer>app.getRootView();

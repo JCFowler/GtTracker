@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { GlobalHelper } from '../helpers';
 
 @Injectable({providedIn: 'root'})
 export class TimerService {
@@ -33,23 +34,16 @@ export class TimerService {
 
         h = `${Math.floor(difference / 3600000)}`;
         difference = difference - (+h * 3600000);
-        h = this.checkIfOneDigit(h);
+        h = GlobalHelper.checkIfOneDigit(h);
 
         m = `${Math.floor(difference / 60000)}`;
         difference = difference - (+m * 60000);
-        m = this.checkIfOneDigit(m);
+        m = GlobalHelper.checkIfOneDigit(m);
 
         s = `${Math.floor(difference / 1000)}`;
         difference = difference - (+s * 1000);
-        s = this.checkIfOneDigit(s);
+        s = GlobalHelper.checkIfOneDigit(s);
 
         this.time.next(`${h}:${m}:${s}`);
-    }
-
-    private checkIfOneDigit(time: string) {
-        if (time.length === 1) {
-            return `0${time}`;
-        }
-        return time;
     }
 }

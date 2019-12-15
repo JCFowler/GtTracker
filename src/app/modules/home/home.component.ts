@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { Game, Totals } from '~/app/logic/models';
 import { GameResult } from '~/app/logic/enums';
 import * as dialogs from 'tns-core-modules/ui/dialogs';
+import { GlobalHelper } from '~/app/logic/helpers';
 
 @Component({
     selector: 'app-home',
@@ -18,7 +19,6 @@ import * as dialogs from 'tns-core-modules/ui/dialogs';
 
 export class HomeComponent implements OnInit {
     @Select(AppState.getCurrentSession) currentSession$: Observable<Session>;
-    @Select(AppState.getCurrentTotals) currentTotals$: Observable<Totals>;
     @Select(AppState.getSessionHistory) history$: Observable<Session[]>;
 
     @Emitter(AppState.setCurrentSession)
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
     public addSessionToHistory: Emittable<null>;
 
     public gameResult = GameResult;
+    public getRatio = GlobalHelper.getRatio;
 
     constructor(private timerService: TimerService) { }
 
@@ -38,9 +39,6 @@ export class HomeComponent implements OnInit {
         this.currentSession$.pipe(first()).subscribe(session => {
             if (session) {
                 this.timerService.startTimer(new Date(session.startTime));
-                console.log('yay', new Date(session.startTime))
-            } else {
-                console.log('no')
             }
         });
     }
@@ -50,7 +48,8 @@ export class HomeComponent implements OnInit {
         this.timerService.startTimer(new Date());
         this.history$.pipe(first()).subscribe(h => {
             const session: Session = {
-                sessionId: h.length - 1,
+                sessionId: h.length + 1,
+                totals: new Totals(),
                 startTime: new Date(),
                 games: []
            };
@@ -98,16 +97,4 @@ export class HomeComponent implements OnInit {
             });
         });
     }
-
-    getKD(k: number, d: number): string {
-        if (k === 0) {
-            return '0.00';
-        } else if (d === 0) {
-            return `${k}.00`;
-        }
-
-        return (k / d).toFixed(2);
-
-    }
-
 }

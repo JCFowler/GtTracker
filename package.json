@@ -1,17 +1,20 @@
 {
   "nativescript": {
     "id": "org.nativescript.GtTracker",
-    "tns-android": {
-      "version": "6.1.2"
-    },
     "tns-ios": {
       "version": "6.1.0"
+    },
+    "tns-android": {
+      "version": "6.1.2"
     }
   },
   "description": "NativeScript Application",
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "scripts": {
+    "clean": "tns platform clean ios && tns platform clean android",
+    "android": "tns run android --env.aot",
+    "ios": "tns run ios --env.aot",
     "lint": "tslint \"src/**/*.ts\""
   },
   "dependencies": {
