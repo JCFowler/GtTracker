@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { ActionbarComponent } from './actionbar/actionbar.component';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
+import { AppTextFieldComponent } from './app-text-field/app-text-field.component';
 
 @NgModule({
     imports: [
@@ -9,9 +10,13 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
     ],
     exports: [
         NativeScriptCommonModule,
-        ActionbarComponent
+        ActionbarComponent,
+        AppTextFieldComponent
     ],
-    declarations: [ActionbarComponent],
+    declarations: [
+        ActionbarComponent,
+        AppTextFieldComponent
+    ],
     providers: [],
     schemas: [
         NO_ERRORS_SCHEMA

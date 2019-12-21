@@ -2,7 +2,7 @@
 <!-- No Session -->
 <StackLayout class="top_layout" *ngIf="!(currentSession$ | async)">
     <Label text="Welcome press the button to start your session!"></Label>
-    <Button class="session-btn" text="Start Session" (tap)="startSessionTap()"></Button>
+    <MDButton class="session-btn" rippleColor="#0d47a1" text="Start Session" (tap)="startSessionTap()"></MDButton>
 </StackLayout>
 
 <!-- Has Current Session -->
@@ -17,12 +17,12 @@
         <Label [text]="'Ties: ' + session.totals.ties"></Label>
         <Label [text]="'Losts: ' + session.totals.losts"></Label>
         <Label [text]="'Quit: ' + session.totals.quit"></Label>
-        <Button class='session-btn' text="End Session" (tap)="endSessionTap()"></Button>
+        <MDButton class="session-btn" rippleColor="#0d47a1" text="End Session" (tap)="endSessionTap()"></MDButton>
         <GridLayout columns="*, *, *, *" rows="100, 60">
-            <Button class="win" col="0" colSpan="2" row="0" text="Win" (tap)="gameFinished(gameResult.Win)"></Button>
-            <Button class="lose" col="2" colSpan="2" row="0" text="Lose" (tap)="gameFinished(gameResult.Lost)"></Button>
-            <Button col="0" colSpan="2" row="1" text="Tie" (tap)="gameFinished(gameResult.Tie)"></Button>
-            <Button col="2" colSpan="2" row="1" text="Quit" (tap)="gameFinished(gameResult.Quit)"></Button>
+            <Button class="Win" col="0" colSpan="2" row="0" text="Win" (tap)="gameFinished(gameResult.Win)"></Button>
+            <Button class="Lose" col="2" colSpan="2" row="0" text="Lose" (tap)="gameFinished(gameResult.Lose)"></Button>
+            <Button class="Tie" col="0" colSpan="2" row="1" text="Tie" (tap)="gameFinished(gameResult.Tie)"></Button>
+            <Button class="Quit" col="2" colSpan="2" row="1" text="Quit" (tap)="gameFinished(gameResult.Quit)"></Button>
         </GridLayout>
     </StackLayout>
     <GridLayout rows="auto, auto *" row="1">

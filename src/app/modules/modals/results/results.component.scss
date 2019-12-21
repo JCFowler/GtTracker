@@ -1,0 +1,32 @@
+/* Add mobile styles for the component here.  */
+
+.top-layout {
+    margin-right: 10;
+    margin-left: 10;
+    background-color: #ffffff;
+
+    TextField {
+        border-bottom-width: 1;
+        border-color: #333333;
+        margin-bottom: 15;
+
+        &.focused {
+            border-bottom-width: 2;
+            border-color: blue;
+        }
+    }
+}
+
+.submit {
+    background-color: #1e88e5;
+}
+
+.main-label {
+    font-size: 32;
+    text-align: center;
+    padding: 10;
+    border-radius: 5;
+    margin: 5;
+    margin-bottom: 15;
+    width: 100%;
+}

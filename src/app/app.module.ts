@@ -10,6 +10,9 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsEmitPluginModule } from '@ngxs-labs/emitter';
 import { Routes } from '@angular/router';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { ResultsComponent } from './modules/modals/results/results.component';
+import { NativeScriptMaterialTextFieldModule } from 'nativescript-material-textfield/angular';
+import { NativeScriptMaterialButtonModule } from 'nativescript-material-button/angular';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -27,15 +30,21 @@ const routes: Routes = [
         NativeScriptModule,
         NativeScriptUISideDrawerModule,
         SharedModule,
+        NativeScriptMaterialTextFieldModule,
+        NativeScriptMaterialButtonModule,
         NgxsModule.forRoot([ ...STATES ]),
         NgxsEmitPluginModule.forRoot(),
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        ResultsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
+    ],
+    entryComponents: [
+        ResultsComponent
     ]
 })
 export class AppModule { }

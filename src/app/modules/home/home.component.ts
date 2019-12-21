@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { TimerService } from '../../logic/services';
 import { Select } from '@ngxs/store';
 import { AppState } from '~/app/logic/states';
@@ -9,7 +9,8 @@ import { first } from 'rxjs/operators';
 import { Game, Totals } from '~/app/logic/models';
 import { GameResult } from '~/app/logic/enums';
 import * as dialogs from 'tns-core-modules/ui/dialogs';
-import { GlobalHelper } from '~/app/logic/helpers';
+import { GlobalHelper, ModalHelper } from '~/app/logic/helpers';
+import { ResultsComponent } from '../modals/results/results.component';
 
 @Component({
     selector: 'app-home',
@@ -33,7 +34,8 @@ export class HomeComponent implements OnInit {
     public gameResult = GameResult;
     public getRatio = GlobalHelper.getRatio;
 
-    constructor(private timerService: TimerService) { }
+    constructor(private timerService: TimerService, private modalHelper: ModalHelper,
+        private vcRef: ViewContainerRef) { }
 
     ngOnInit() {
         this.currentSession$.pipe(first()).subscribe(session => {
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit {
                 this.timerService.startTimer(new Date(session.startTime));
             }
         });
+        console.log(this.gameResult[0] + '-result')
     }
 
     startSessionTap() {
@@ -74,27 +77,17 @@ export class HomeComponent implements OnInit {
     }
 
     gameFinished(result: GameResult) {
-        dialogs.prompt({
-            title: 'Kills',
-            message: 'How many kills?',
-            okButtonText: 'Ok',
-            inputType: dialogs.inputType.number,
-        }).then(kills => {
-            dialogs.prompt({
-                title: 'Deaths',
-                message: 'How many deaths?',
-                okButtonText: 'Ok',
-                inputType: dialogs.inputType.number,
-            }).then(deaths => {
+        this.modalHelper.openFullscreenModal(ResultsComponent, this.vcRef,
+            { result: GameResult[result] }).then((res: string[]) => {
+            if (res) {
                 const game: Game = {
                     result: result,
                     time: new Date(),
-                    kills: +kills.text,
-                    deaths: +deaths.text
+                    kills: +res[0],
+                    deaths: +res[1]
                 };
-
                 this.updateCurrentSessionGame.emit(game);
-            });
+            }
         });
     }
 }

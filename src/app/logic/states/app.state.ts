@@ -56,7 +56,7 @@ export class AppState {
             case GameResult.Tie:
                 session.totals.ties++;
                 break;
-            case GameResult.Lost:
+            case GameResult.Lose:
                 session.totals.losts++;
                 break;
             case GameResult.Quit:

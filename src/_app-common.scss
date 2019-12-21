@@ -4,6 +4,11 @@
 .fa {
     font-family: "FontAwesome";
 }
+
+Button, MDButton {
+    text-transform: none;
+}
+
 // Common page class
 .page-content {
     .page-placeholder {
@@ -82,4 +87,20 @@ $sidedrawer-list-icon-size: 20;
             }
         }
     }
+}
+
+.Win {
+    background-color: #06CE6A;
+}
+
+.Tie {
+    background-color: #D7D7D7;
+}
+
+.Lose {
+    background-color: #D84039;
+}
+
+.Quit {
+    background-color: #D7D7D7;
 }

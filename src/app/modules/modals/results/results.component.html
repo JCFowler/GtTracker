@@ -1,0 +1,13 @@
+<StackLayout class="top-layout">
+    <Label [class]="result + ' main-label'" [text]="result"></Label>
+    
+    <Label text="Kills"></Label>
+    <TextField [class.focused]="focusIndex === 0" hint="Kills" keyboardType="number" returnKeyType="next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></TextField>
+
+    <Label text="Deaths"></Label>
+    <TextField [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></TextField>
+
+    <MDButton class="submit" rippleColor="#0d47a1" text="Submit" (tap)="closeModal()"></MDButton>
+    <Button text="Cancel" (tap)="closeModal(false)"></Button>
+
+</StackLayout>

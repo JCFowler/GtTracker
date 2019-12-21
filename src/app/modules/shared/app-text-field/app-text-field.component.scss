@@ -1,0 +1,16 @@
+/* Add mobile styles for the component here.  */
+
+.main-layout {
+    margin-right: 15;
+    margin-left: 15;
+    margin-top: 10;
+    margin-bottom: 10;
+
+    TextField {
+        border-width: 1;
+        border-color: #333333;
+        border-radius: 3;
+        padding: 5;
+        margin-top: 3;
+    }
+}
