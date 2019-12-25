@@ -6,11 +6,11 @@ export class ModalHelper {
 
     constructor(private modalService: ModalDialogService) { }
 
-    openFullscreenModal(component: any, vcRef: ViewContainerRef, context = {}): Promise<any> {
+    openModal(component: any, vcRef: ViewContainerRef, fullscreen, context = {}): Promise<any> {
         console.log('Opening modal...');
         const options: ModalDialogOptions = {
             viewContainerRef: vcRef,
-            fullscreen: false,
+            fullscreen: fullscreen,
             context: context
         };
 

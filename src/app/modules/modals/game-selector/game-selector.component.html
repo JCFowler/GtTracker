@@ -1,0 +1,11 @@
+<StackLayout class="modal-layout">
+    <Label class="title" text="Select Game Type"></Label>
+    <ListView class="listview" [items]="gameTypes" (itemTap)="onItemTap($event)">
+        <ng-template let-type="item" let-i="index" let-odd="odd" let-even="even">
+            <GridLayout [class.selected]="i===selectedIndex" rows="*, auto, *" height="50">
+                <Label row="1" [text]="type" width="100%"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+    <MDButton class="primary-button" [isEnabled]="selectedIndex !== -1" rippleColor="#0d47a1" text="Start Session" (tap)="closeModal()"></MDButton>
+</StackLayout>

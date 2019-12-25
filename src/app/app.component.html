@@ -5,11 +5,9 @@ https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawe
 -->
 <RadSideDrawer [drawerTransition]="sideDrawerTransition">
     <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
-        <StackLayout row="0" class="sidedrawer-header">
-            <Label class="sidedrawer-header-image fa" text="&#xf2bd;"></Label>
-            <Label class="sidedrawer-header-brand" text="User Name"></Label>
-            <Label class="footnote" text="username@mail.com"></Label>
-        </StackLayout>
+        <GridLayout row="0" rows="*, auto, *" class="sidedrawer-header">
+            <Label row="1" text="Game Time Tracker"></Label>
+        </GridLayout>
     
         <ScrollView row="1" class="sidedrawer-content">
             <StackLayout>

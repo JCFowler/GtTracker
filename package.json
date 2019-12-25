@@ -28,18 +28,18 @@
     "@angular/router": "~8.2.0",
     "@ngxs-labs/emitter": "^2.0.0",
     "@ngxs/store": "^3.6.0",
-    "nativescript-angular": "~8.2.0",
+    "nativescript-angular": "^8.20.3",
     "nativescript-material-button": "^2.5.4",
     "nativescript-theme-core": "~1.0.6",
     "nativescript-ui-sidedrawer": "~7.0.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",
     "tns-core-modules": "~6.2.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "8.2.0",
-    "@ngtools/webpack": "8.2.0",
+    "@angular/compiler-cli": "~8.2.0",
+    "@ngtools/webpack": "~8.2.0",
     "codelyzer": "~4.5.0",
     "nativescript-dev-webpack": "^1.4.0",
     "node-sass": "^4.7.1",

@@ -1,3 +1,5 @@
+@import '../../../app-variables';
+
 .top_layout {
     Label {
         font-size: 18;
@@ -12,14 +14,6 @@
 
     .session-btn {
         color: white;
-        background-color: #1e88e5;
-    }
-
-    .win {
-        background-color: #06CE6A;
-    }
-    
-    .lose {
-        background-color: #D84039;
+        background-color: $primary;
     }
 }

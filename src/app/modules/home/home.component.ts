@@ -11,6 +11,7 @@ import { GameResult } from '~/app/logic/enums';
 import * as dialogs from 'tns-core-modules/ui/dialogs';
 import { GlobalHelper, ModalHelper } from '~/app/logic/helpers';
 import { ResultsComponent } from '../modals/results/results.component';
+import { GameSelectorComponent } from '../modals/game-selector/game-selector.component';
 
 @Component({
     selector: 'app-home',
@@ -43,21 +44,23 @@ export class HomeComponent implements OnInit {
                 this.timerService.startTimer(new Date(session.startTime));
             }
         });
-        console.log(this.gameResult[0] + '-result')
+        console.log(this.gameResult[0] + '-result');
     }
 
     startSessionTap() {
-        console.log('Start Session');
-        this.timerService.startTimer(new Date());
-        this.history$.pipe(first()).subscribe(h => {
-            const session: Session = {
-                sessionId: h.length + 1,
-                totals: new Totals(),
-                startTime: new Date(),
-                games: []
-           };
+        this.modalHelper.openModal(GameSelectorComponent, this.vcRef, false).then((res: string) => {
+            this.timerService.startTimer(new Date());
+            this.history$.pipe(first()).subscribe(h => {
+                const session: Session = {
+                    sessionId: h.length + 1,
+                    gameType: res,
+                    totals: new Totals(),
+                    startTime: new Date(),
+                    games: []
+               };
 
-           this.setCurrentSession.emit(session);
+               this.setCurrentSession.emit(session);
+            });
         });
 
     }
@@ -77,7 +80,7 @@ export class HomeComponent implements OnInit {
     }
 
     gameFinished(result: GameResult) {
-        this.modalHelper.openFullscreenModal(ResultsComponent, this.vcRef,
+        this.modalHelper.openModal(ResultsComponent, this.vcRef, false,
             { result: GameResult[result] }).then((res: string[]) => {
             if (res) {
                 const game: Game = {

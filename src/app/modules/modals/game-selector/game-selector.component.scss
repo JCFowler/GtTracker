@@ -1,0 +1,28 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../app-variables';
+
+.title {
+    font-size: 20;
+    text-align: center;
+    margin-top: 10;
+    margin-bottom: 20;
+}
+
+.listview {
+    height: 300;
+
+    GridLayout {
+        height: 50;
+
+        Label {
+            font-size: 24;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        &.selected {
+            background-color: $primary;
+            color: #ffffff;
+        }
+    }
+}

@@ -12,6 +12,7 @@
             <Label text="Session time: " ></Label>
             <Label [text]="timerService.time | async"></Label>
         </StackLayout>
+        <Label [text]="'Game Type: ' + session.gameType"></Label>
         <Label [text]="'Games: ' + session.totals.games"></Label>
         <Label [text]="'Wins: ' + session.totals.wins"></Label>
         <Label [text]="'Ties: ' + session.totals.ties"></Label>

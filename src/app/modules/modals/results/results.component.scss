@@ -1,24 +1,8 @@
 /* Add mobile styles for the component here.  */
-
-.top-layout {
-    margin-right: 10;
-    margin-left: 10;
-    background-color: #ffffff;
-
-    TextField {
-        border-bottom-width: 1;
-        border-color: #333333;
-        margin-bottom: 15;
-
-        &.focused {
-            border-bottom-width: 2;
-            border-color: blue;
-        }
-    }
-}
+@import '../../../../app-variables';
 
 .submit {
-    background-color: #1e88e5;
+    background-color: $primary;
 }
 
 .main-label {

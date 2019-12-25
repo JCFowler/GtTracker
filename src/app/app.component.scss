@@ -1,0 +1,43 @@
+@import '../app-variables';
+
+.sidedrawer {
+    .sidedrawer-header {
+        height: 80;
+        background-color: $ab-background;
+        text-align: center;
+
+        Label {
+            color: #ffffff;
+            font-size: 20;
+            font-weight: 500;
+        }
+    }
+
+    .sidedrawer-content {
+        background-color: $side-drawer-background;
+
+        .sidedrawer-list-item {
+            padding-left: 15;
+            padding-top: 5;
+            padding-bottom: 5;
+
+            Label {
+                vertical-align: center;
+                color: $blue-dark;
+                font-size: 18;
+            }
+
+            .fa {
+                width: 20;
+                margin-right: 10;
+            }
+
+            &.selected {
+                background-color: $item-active-background;
+                Label {
+                    color: $item-active-color;
+                }
+            }
+        }
+    }
+}
