@@ -13,6 +13,9 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { ResultsComponent } from './modules/modals/results/results.component';
 import { NativeScriptMaterialButtonModule } from 'nativescript-material-button/angular';
 import { GameSelectorComponent } from './modules/modals/game-selector/game-selector.component';
+import { registerElement } from 'nativescript-angular';
+
+registerElement('NumericTextField', () => require('nativescript-numeric-keyboard').NumericKeyboardView);
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },

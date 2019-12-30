@@ -8,22 +8,26 @@
 <!-- Has Current Session -->
 <GridLayout class="top_layout" rows="auto, *" *ngIf="currentSession$ | async; let session">
     <StackLayout row="0">
-        <StackLayout orientation="horizontal">
-            <Label text="Session time: " ></Label>
-            <Label [text]="timerService.time | async"></Label>
-        </StackLayout>
-        <Label [text]="'Game Type: ' + session.gameType"></Label>
-        <Label [text]="'Games: ' + session.totals.games"></Label>
-        <Label [text]="'Wins: ' + session.totals.wins"></Label>
-        <Label [text]="'Ties: ' + session.totals.ties"></Label>
-        <Label [text]="'Losts: ' + session.totals.losts"></Label>
-        <Label [text]="'Quit: ' + session.totals.quit"></Label>
+        <GridLayout class="time-layout" columns="*, *, *" rows="auto, auto, auto">
+            <Label class="top" row="0" col="0" colSpan="3" [text]="session.gameType + ' Session time'" ></Label>
+            <Label class="time" row="1" col="0" colSpan="3" [text]="timerService.time | async"></Label>
+
+            <Label *ngIf="session.totals.games > 0" class="bottom" row="2" col="0" [text]="'Games: ' + session.totals.games"></Label>
+            <Label *ngIf="session.totals.games > 0" class="bottom" row="2" col="1" [text]="'W/L: ' + getRatio(session.totals.wins, session.totals.losts)"></Label>
+            <Label *ngIf="session.totals.games > 0" class="bottom" row="2" col="2" [text]="'K/D: ' + getRatio(kills, deaths)"></Label>
+        </GridLayout>
         <MDButton class="session-btn" rippleColor="#0d47a1" text="End Session" (tap)="endSessionTap()"></MDButton>
-        <GridLayout columns="*, *, *, *" rows="100, 60">
+        <GridLayout class="m-b-10" columns="*, *, *, *" rows="100, 60">
             <Button class="Win" col="0" colSpan="2" row="0" text="Win" (tap)="gameFinished(gameResult.Win)"></Button>
             <Button class="Lose" col="2" colSpan="2" row="0" text="Lose" (tap)="gameFinished(gameResult.Lose)"></Button>
             <Button class="Tie" col="0" colSpan="2" row="1" text="Tie" (tap)="gameFinished(gameResult.Tie)"></Button>
             <Button class="Quit" col="2" colSpan="2" row="1" text="Quit" (tap)="gameFinished(gameResult.Quit)"></Button>
+        </GridLayout>
+        <GridLayout *ngIf="session.totals.games > 0" class="center" columns="*, *, *, *">
+            <Label col="0" [text]="'Wins: ' + session.totals.wins"></Label>
+            <Label col="1" [text]="'Losts: ' + session.totals.losts"></Label>
+            <Label col="2" [text]="'Ties: ' + session.totals.ties"></Label>
+            <Label col="3" [text]="'Quit: ' + session.totals.quit"></Label>
         </GridLayout>
     </StackLayout>
     <GridLayout rows="auto, auto *" row="1">

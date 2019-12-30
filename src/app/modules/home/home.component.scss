@@ -1,6 +1,29 @@
 @import '../../../app-variables';
 
 .top_layout {
+    .time-layout {
+        text-align: center;
+        margin-top: 10;
+        margin-bottom: 10;
+
+        .top {
+            font-size: 16;
+            color: black;
+        }
+
+        .time {
+            font-size: 48;
+            color: $primary;
+            margin-top: -7;
+            margin-bottom: -7;
+        }
+
+        .bottom {
+            font-size: 18;
+            color: black;
+        }
+    }
+
     Label {
         font-size: 18;
     }

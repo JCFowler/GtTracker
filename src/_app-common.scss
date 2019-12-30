@@ -10,8 +10,7 @@ Button, MDButton {
 }
 
 .modal-layout {
-    margin-right: 10;
-    margin-left: 10;
+    margin: 10;
     background-color: #ffffff;
 
     TextField {
@@ -32,6 +31,11 @@ Button, MDButton {
     height: 70;
     font-size: 20;
     border-radius: 1;
+}
+
+.center {
+    text-align: center;
+    vertical-align: middle;
 }
 
 .Win {

@@ -35,6 +35,9 @@ export class HomeComponent implements OnInit {
     public gameResult = GameResult;
     public getRatio = GlobalHelper.getRatio;
 
+    public kills = 0;
+    public deaths = 0;
+
     constructor(private timerService: TimerService, private modalHelper: ModalHelper,
         private vcRef: ViewContainerRef) { }
 
@@ -42,12 +45,20 @@ export class HomeComponent implements OnInit {
         this.currentSession$.pipe(first()).subscribe(session => {
             if (session) {
                 this.timerService.startTimer(new Date(session.startTime));
+
+                for (let i = 0; i < session.games.length; i++) {
+                    this.kills += session.games[i].kills;
+                    this.deaths += session.games[i].deaths;
+                }
             }
         });
         console.log(this.gameResult[0] + '-result');
     }
 
     startSessionTap() {
+        this.kills = 0;
+        this.deaths = 0;
+
         this.modalHelper.openModal(GameSelectorComponent, this.vcRef, false).then((res: string) => {
             this.timerService.startTimer(new Date());
             this.history$.pipe(first()).subscribe(h => {
@@ -89,6 +100,10 @@ export class HomeComponent implements OnInit {
                     kills: +res[0],
                     deaths: +res[1]
                 };
+
+                this.kills += game.kills;
+                this.deaths += game.deaths;
+
                 this.updateCurrentSessionGame.emit(game);
             }
         });

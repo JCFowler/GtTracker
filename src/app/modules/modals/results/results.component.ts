@@ -15,8 +15,10 @@ export class ResultsComponent implements OnInit {
   public focusIndex: number;
   public textFields: TextField[] = [];
   public result: string;
+  public isIOS: boolean;
 
   ngOnInit() {
+    this.isIOS = isIOS;
     this.result = this.mParams.context.result;
   }
 
