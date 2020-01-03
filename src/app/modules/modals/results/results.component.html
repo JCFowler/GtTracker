@@ -9,7 +9,6 @@
     <TextField *ngIf="!isIOS" [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></TextField>
     <NumericTextField *ngIf="isIOS" [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" returnKeyTitle="Submit" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></NumericTextField>
 
-    <MDButton class="submit" rippleColor="#0d47a1" text="Submit" (tap)="closeModal()"></MDButton>
+    <Button class="primary-button" text="Submit" (tap)="closeModal()"></Button>
     <Button text="Cancel" (tap)="closeModal(false)"></Button>
-
 </StackLayout>

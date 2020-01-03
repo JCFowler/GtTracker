@@ -2,7 +2,7 @@
 <!-- No Session -->
 <StackLayout class="top_layout" *ngIf="!(currentSession$ | async)">
     <Label text="Welcome press the button to start your session!"></Label>
-    <MDButton class="session-btn" rippleColor="#0d47a1" text="Start Session" (tap)="startSessionTap()"></MDButton>
+    <Button class="primary-button" text="Start Session" (tap)="startSessionTap()"></Button>
 </StackLayout>
 
 <!-- Has Current Session -->
@@ -16,8 +16,8 @@
             <Label *ngIf="session.totals.games > 0" class="bottom" row="2" col="1" [text]="'W/L: ' + getRatio(session.totals.wins, session.totals.losts)"></Label>
             <Label *ngIf="session.totals.games > 0" class="bottom" row="2" col="2" [text]="'K/D: ' + getRatio(kills, deaths)"></Label>
         </GridLayout>
-        <MDButton class="session-btn" rippleColor="#0d47a1" text="End Session" (tap)="endSessionTap()"></MDButton>
-        <GridLayout class="m-b-10" columns="*, *, *, *" rows="100, 60">
+        <Button class="primary-button" text="End Session" (tap)="endSessionTap()"></Button>
+        <GridLayout class=" btn-layout m-b-10" columns="*, *, *, *" rows="100, 60">
             <Button class="Win" col="0" colSpan="2" row="0" text="Win" (tap)="gameFinished(gameResult.Win)"></Button>
             <Button class="Lose" col="2" colSpan="2" row="0" text="Lose" (tap)="gameFinished(gameResult.Lose)"></Button>
             <Button class="Tie" col="0" colSpan="2" row="1" text="Tie" (tap)="gameFinished(gameResult.Tie)"></Button>

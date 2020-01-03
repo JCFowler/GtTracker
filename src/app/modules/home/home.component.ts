@@ -59,7 +59,11 @@ export class HomeComponent implements OnInit {
         this.kills = 0;
         this.deaths = 0;
 
-        this.modalHelper.openModal(GameSelectorComponent, this.vcRef, false).then((res: string) => {
+        this.modalHelper.openModal(GameSelectorComponent, this.vcRef, true).then((res: string) => {
+            if (!res) {
+                return;
+            }
+
             this.timerService.startTimer(new Date());
             this.history$.pipe(first()).subscribe(h => {
                 const session: Session = {

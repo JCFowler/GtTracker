@@ -9,8 +9,6 @@
 }
 
 .listview {
-    height: 300;
-
     GridLayout {
         height: 50;
 
@@ -25,4 +23,18 @@
             color: #ffffff;
         }
     }
+}
+
+.add-field {
+    font-size: 20;
+    height: 50;
+    margin-top: 10;
+    margin-bottom: 10;
+}
+
+.plus {
+    font-size: 26;
+    color: $primary;
+    vertical-align: middle;
+    padding: 15;
 }

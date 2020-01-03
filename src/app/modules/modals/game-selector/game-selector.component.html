@@ -1,11 +1,31 @@
-<StackLayout class="modal-layout">
-    <Label class="title" text="Select Game Type"></Label>
-    <ListView class="listview" [items]="gameTypes" (itemTap)="onItemTap($event)">
+<GridLayout rows="auto, *, auto, auto" class="modal-layout">
+    <StackLayout row="0">
+        <Label class="title" text="Select Game"></Label>
+        <StackLayout class="hr-light"></StackLayout>
+        <GridLayout columns="*, auto">
+            <TextField class="add-field" [class.focused]="focusIndex === 1" returnKeyType="done" (returnPress)="plusTap()" col="0" colSpan="2" hint="New Game" (loaded)="loadTextField($event.object)"></TextField>
+            <Label col="1" text="&#xf067;" class="fa plus" (tap)="plusTap()"></Label>
+        </GridLayout>
+    </StackLayout>
+
+    <ListView row="1" class="listview" [items]="gameNames" (itemTap)="onItemTap($event)">
         <ng-template let-type="item" let-i="index" let-odd="odd" let-even="even">
             <GridLayout [class.selected]="i===selectedIndex" rows="*, auto, *" height="50">
                 <Label row="1" [text]="type" width="100%"></Label>
             </GridLayout>
         </ng-template>
     </ListView>
-    <MDButton class="primary-button" [isEnabled]="selectedIndex !== -1" rippleColor="#0d47a1" text="Start Session" (tap)="closeModal()"></MDButton>
-</StackLayout>
+
+    <GridLayout class="m-b-10" row="2" columns="*, *, *" rows="auto, auto, auto">
+        <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
+        <Button class="primary-box-button" [class.selected]="selectedType === 1" col="1" row="0" text="Fighting" (tap)="typeTap(1)"></Button>
+        <Button class="primary-box-button" [class.selected]="selectedType === 2" col="2" row="0" text="MOBA" (tap)="typeTap(2)"></Button>
+        <Button class="primary-box-button" [class.selected]="selectedType === 3"col="0" row="1" text="RTS" (tap)="typeTap(3)"></Button>
+        <Button class="primary-box-button" [class.selected]="selectedType === 4"col="1" row="1" text="Battle Royal" (tap)="typeTap(4)"></Button>
+    </GridLayout>
+
+    <StackLayout row="3" >
+        <Button class="primary-disable-button" [isEnabled]="selectedIndex !== -1" text="Start Session" (tap)="closeModal()"></Button>
+        <Button class="clear-button" text="Cancel" (tap)="closeModal()"></Button>
+    </StackLayout>
+</GridLayout>

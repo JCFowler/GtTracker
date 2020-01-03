@@ -28,9 +28,8 @@
         font-size: 18;
     }
 
-    Button, MDButton {
+    Button {
         height: 80;
-        color: black;
         margin: 2;
         font-size: 18;
     }
@@ -38,5 +37,13 @@
     .session-btn {
         color: white;
         background-color: $primary;
+    }
+}
+
+.btn-layout {
+    margin-bottom: 10;
+
+    Button {
+        color: black;
     }
 }

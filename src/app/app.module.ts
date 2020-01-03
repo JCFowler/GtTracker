@@ -11,7 +11,6 @@ import { NgxsEmitPluginModule } from '@ngxs-labs/emitter';
 import { Routes } from '@angular/router';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { ResultsComponent } from './modules/modals/results/results.component';
-import { NativeScriptMaterialButtonModule } from 'nativescript-material-button/angular';
 import { GameSelectorComponent } from './modules/modals/game-selector/game-selector.component';
 import { registerElement } from 'nativescript-angular';
 
@@ -33,7 +32,6 @@ const routes: Routes = [
         NativeScriptModule,
         NativeScriptUISideDrawerModule,
         SharedModule,
-        NativeScriptMaterialButtonModule,
         NgxsModule.forRoot([ ...STATES ]),
         NgxsEmitPluginModule.forRoot(),
     ],

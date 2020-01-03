@@ -5,7 +5,7 @@
     font-family: "FontAwesome";
 }
 
-Button, MDButton {
+Button {
     text-transform: none;
 }
 
@@ -31,6 +31,56 @@ Button, MDButton {
     height: 70;
     font-size: 20;
     border-radius: 1;
+
+    &:highlighted {
+        background-color: darken( $primary, 10% )
+    }
+}
+
+.primary-disable-button {
+    color: #ffffff;
+    background-color: $primary;
+    height: 70;
+    font-size: 20;
+    border-radius: 1;
+
+    &:disabled {
+        background-color: $disabled-background;
+        color: $disabled-color;
+    }
+}
+
+.primary-box-button {
+    color: $primary;
+    background-color: #ffffff;
+    height: 55;
+    font-size: 20;
+    border-radius: 1;
+    border-color: $primary;
+    border-width: 2;
+    z-index: 0;
+    margin: 5;
+
+    &.selected {
+        background-color: $primary;
+        color: #ffffff;
+    }
+}
+
+.clear-button {
+    font-size: 20;
+    color: $primary;
+    background-color: transparent;
+    text-transform: none;
+    border-width: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    height: 60;
+
+    &:highlighted {
+        color: lighten( $primary, 20% );
+    }
 }
 
 .center {
