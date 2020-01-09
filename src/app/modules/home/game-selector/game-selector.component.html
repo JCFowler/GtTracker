@@ -1,0 +1,17 @@
+<ns-actionbar title="Select game" [showBack]="true" [showAdd]="true"></ns-actionbar>
+<GridLayout rows="*, auto, auto">
+    <ListView *ngIf="games$ | async; let games" row="0" class="listview" [items]="games" (itemTap)="onGameTap($event)">
+        <ng-template let-game="item" let-i="index" let-odd="odd" let-even="even">
+            <GridLayout [class.selected]="i===selectedIndex" rows="*, auto, *" height="50">
+                <Label row="1" [text]="game.name" width="100%"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+
+    <StackLayout *ngIf="selectedGame" class="selected-game-layout" row="1">
+        <Label class="main-text" [text]="selectedGame.name"></Label>
+        <Label class="sub-text" [text]="gameType[selectedGame.type]"></Label>
+    </StackLayout>
+
+    <Button class="primary-disable-button" row="2" [isEnabled]="selectedIndex !== -1" text="Start Session" (tap)="finishTap()"></Button>
+</GridLayout>

@@ -9,6 +9,10 @@ export class ApplicationStorage {
 
     public static get<T>(key: string): T {
         const valueJSON = getString(key);
+        if (valueJSON === undefined) {
+            return undefined;
+        }
+
         return JSON.parse(valueJSON) as T;
     }
 

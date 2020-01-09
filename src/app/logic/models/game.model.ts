@@ -1,9 +1,7 @@
-import { GameResult } from '../enums';
+import { GameType } from '../enums';
 
 export interface Game {
     gameId?: number;
-    result: GameResult;
-    time: Date;
-    kills: number;
-    deaths: number;
+    name: string;
+    type: GameType;
 }

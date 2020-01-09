@@ -6,12 +6,11 @@ import { Observable } from 'rxjs';
 import { Session } from '~/app/logic/models/session.model';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { first } from 'rxjs/operators';
-import { Game, Totals } from '~/app/logic/models';
+import { Round } from '~/app/logic/models';
 import { GameResult } from '~/app/logic/enums';
 import * as dialogs from 'tns-core-modules/ui/dialogs';
-import { GlobalHelper, ModalHelper } from '~/app/logic/helpers';
+import { GlobalHelper, ModalHelper, RouterHelper } from '~/app/logic/helpers';
 import { ResultsComponent } from '../modals/results/results.component';
-import { GameSelectorComponent } from '../modals/game-selector/game-selector.component';
 
 @Component({
     selector: 'app-home',
@@ -27,7 +26,7 @@ export class HomeComponent implements OnInit {
     public setCurrentSession: Emittable<Session>;
 
     @Emitter(AppState.updateCurrentSessionGame)
-    public updateCurrentSessionGame: Emittable<Game>;
+    public updateCurrentSessionGame: Emittable<Round>;
 
     @Emitter(AppState.addSessionToHistory)
     public addSessionToHistory: Emittable<null>;
@@ -39,16 +38,16 @@ export class HomeComponent implements OnInit {
     public deaths = 0;
 
     constructor(private timerService: TimerService, private modalHelper: ModalHelper,
-        private vcRef: ViewContainerRef) { }
+        private vcRef: ViewContainerRef, private routerHelper: RouterHelper) { }
 
     ngOnInit() {
         this.currentSession$.pipe(first()).subscribe(session => {
             if (session) {
                 this.timerService.startTimer(new Date(session.startTime));
 
-                for (let i = 0; i < session.games.length; i++) {
-                    this.kills += session.games[i].kills;
-                    this.deaths += session.games[i].deaths;
+                for (let i = 0; i < session.rounds.length; i++) {
+                    this.kills += session.rounds[i].kills;
+                    this.deaths += session.rounds[i].deaths;
                 }
             }
         });
@@ -59,25 +58,7 @@ export class HomeComponent implements OnInit {
         this.kills = 0;
         this.deaths = 0;
 
-        this.modalHelper.openModal(GameSelectorComponent, this.vcRef, true).then((res: string) => {
-            if (!res) {
-                return;
-            }
-
-            this.timerService.startTimer(new Date());
-            this.history$.pipe(first()).subscribe(h => {
-                const session: Session = {
-                    sessionId: h.length + 1,
-                    gameType: res,
-                    totals: new Totals(),
-                    startTime: new Date(),
-                    games: []
-               };
-
-               this.setCurrentSession.emit(session);
-            });
-        });
-
+        this.routerHelper.navigate(['/home/game-selector']);
     }
 
     endSessionTap() {
@@ -98,7 +79,7 @@ export class HomeComponent implements OnInit {
         this.modalHelper.openModal(ResultsComponent, this.vcRef, false,
             { result: GameResult[result] }).then((res: string[]) => {
             if (res) {
-                const game: Game = {
+                const game: Round = {
                     result: result,
                     time: new Date(),
                     kills: +res[0],

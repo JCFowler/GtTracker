@@ -9,7 +9,7 @@
 <GridLayout class="top_layout" rows="auto, *" *ngIf="currentSession$ | async; let session">
     <StackLayout row="0">
         <GridLayout class="time-layout" columns="*, *, *" rows="auto, auto, auto">
-            <Label class="top" row="0" col="0" colSpan="3" [text]="session.gameType + ' Session time'" ></Label>
+            <Label class="top" row="0" col="0" colSpan="3" [text]="session.game.name + ' Session time'" ></Label>
             <Label class="time" row="1" col="0" colSpan="3" [text]="timerService.time | async"></Label>
 
             <Label *ngIf="session.totals.games > 0" class="bottom" row="2" col="0" [text]="'Games: ' + session.totals.games"></Label>
@@ -39,7 +39,7 @@
             <Label col="4" text="Time"></Label>
         </GridLayout>
         <StackLayout row="1" height="1" backgroundColor="gray"></StackLayout>
-        <ListView row="2" [items]="session.games">
+        <ListView row="2" [items]="session.rounds">
             <ng-template let-game="item" let-i="index" let-odd="odd" let-even="even">
                 <GridLayout columns="*, *, *, *, *">
                     <Label col="0" [text]="gameResult[game.result]"></Label>

@@ -1,6 +1,13 @@
 /* Add mobile styles for the component here.  */
 @import '../../../../app-variables';
 
+.add-btn {
+    width: 75%;
+    height: 50;
+    margin-top: 5;
+    margin-bottom: 10;
+}
+
 .title {
     font-size: 20;
     text-align: center;
@@ -32,9 +39,18 @@
     margin-bottom: 10;
 }
 
-.plus {
-    font-size: 26;
-    color: $primary;
-    vertical-align: middle;
-    padding: 15;
+.selected-game-layout {
+    text-align: center;
+    margin: 15;
+
+    .main-text {
+        color: $primary;
+        font-size: 30;
+        font-weight: 400;
+    }
+
+    .sub-text {
+        color: $secondary;
+        font-size: 18;
+    }
 }

@@ -1,11 +1,12 @@
-import { Game } from './game.model';
+import { Round } from './round.model';
 import { Totals } from './totals.model';
+import { Game } from './game.model';
 
 export interface Session {
     sessionId: number;
-    gameType: string;
+    game: Game;
     totals: Totals;
     startTime: Date;
     endTime?: Date;
-    games: Game[];
+    rounds: Round[];
 }

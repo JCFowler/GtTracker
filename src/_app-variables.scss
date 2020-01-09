@@ -5,6 +5,7 @@
 
 // Custom colors
 $primary: #1e88e5;
+$secondary: #d32f2f;
 
 $win: #06CE6A;
 $lose: #D84039;
@@ -52,7 +53,6 @@ $page-content-placeholder-font-size: 20;
 
 // Colors
 $background: #fff;
-$secondary: lighten(#000, 46%);
 $disabled: lighten(#000, 62%);
 $accent: $accent-dark;
 $error: $error-light;
@@ -81,5 +81,4 @@ $btn-color-outline-highlighted: lighten($btn-color, 10%);
 
 //Text colors
 $headings-color: $blue-dark;
-$secondary: $blue-dark;
 $text-color: $blue-dark;

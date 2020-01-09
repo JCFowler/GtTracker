@@ -11,5 +11,8 @@
     <!-- Android & iOS Back Button -->
     <NavigationButton *ngIf="showBack" android:android.systemIcon="ic_menu_back" (tap)="onAndroidBack()"></NavigationButton>
 
+    <!-- Add action item -->
+    <ActionItem *ngIf="showAdd" (tap)="onAdd()" ios.systemIcon="4" ios.position="right" android.systemIcon="ic_input_add" text="add"></ActionItem>
+
     <Label class="action-bar-title" [text]="title"></Label>
 </ActionBar>
