@@ -11,6 +11,10 @@
     <StackLayout *ngIf="selectedGame" class="selected-game-layout" row="1">
         <Label class="main-text" [text]="selectedGame.name"></Label>
         <Label class="sub-text" [text]="gameType[selectedGame.type]"></Label>
+        <GridLayout columns="*, *">
+            <Button class="edit primary-box-button" col="0" text="Edit" (tap)="editTap()"></Button>
+            <Button class="delete primary-box-button" col="1" text="Delete" (tap)="deleteTap()"></Button>
+        </GridLayout>
     </StackLayout>
 
     <Button class="primary-disable-button" row="2" [isEnabled]="selectedIndex !== -1" text="Start Session" (tap)="finishTap()"></Button>

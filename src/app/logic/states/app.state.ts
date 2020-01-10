@@ -71,6 +71,30 @@ export class AppState {
     }
 
     @Receiver()
+    public static async deleteGame(ctx: StateContext<AppStateModel>, action: EmitterAction<number>) {
+        const games = ctx.getState().games;
+        games.splice(action.payload, 1);
+
+        ctx.patchState({
+            games: games
+        });
+        LocalStorage.setAppState(ctx.getState());
+        console.log('Game was removed.');
+    }
+
+    @Receiver()
+    public static async editGame(ctx: StateContext<AppStateModel>, action: EmitterAction<{index: number, game: Game}>) {
+        const games = ctx.getState().games;
+        games[action.payload.index] = action.payload.game;
+
+        ctx.patchState({
+            games: games
+        });
+        LocalStorage.setAppState(ctx.getState());
+        console.log('Game was edited.');
+    }
+
+    @Receiver()
     public static async setCurrentSession(ctx: StateContext<AppStateModel>, action: EmitterAction<Session>) {
         ctx.patchState({
             currentSession: action.payload

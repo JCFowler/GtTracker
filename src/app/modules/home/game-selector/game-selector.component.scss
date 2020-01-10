@@ -32,6 +32,19 @@
     }
 }
 
+.edit {
+    margin-right: 20;
+    margin-left: 20;
+    color: $primary;
+}
+
+.delete {
+    margin-right: 20;
+    margin-left: 20;
+    color: $lose;
+    border-color: $lose;
+}
+
 .add-field {
     font-size: 20;
     height: 50;
@@ -50,7 +63,9 @@
     }
 
     .sub-text {
-        color: $secondary;
+        color: black;
         font-size: 18;
+        margin-top: -5;
+        margin-bottom: 5;
     }
 }

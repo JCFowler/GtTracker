@@ -1,8 +1,8 @@
 <StackLayout class="modal-layout">
-    <Label class="main-label" text="Add new game"></Label>
+    <Label class="main-label" [text]="title"></Label>
     <StackLayout class="hr-light"></StackLayout>
     <GridLayout class="modal-layout" rows="auto, auto, auto">
-        <TextField class="add-field" row="0"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
+        <TextField class="add-field" row="0" [text]="name"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
 
         <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto">
             <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
@@ -13,7 +13,7 @@
         </GridLayout>
 
         <StackLayout row="3" >
-            <Button row="2" class="primary-disable-button" [isEnabled]="selectedType !== -1 && name !== ''" text="Add game" (tap)="finishTap()"></Button>
+            <Button row="2" class="primary-disable-button" [isEnabled]="selectedType !== -1 && name !== ''" [text]="buttonText" (tap)="finishTap()"></Button>
             <Button class="clear-button" text="Cancel" (tap)="finishTap(false)"></Button>
         </StackLayout>
     </GridLayout>

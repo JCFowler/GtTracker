@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterHelper } from '~/app/logic/helpers';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { RouterHelper, ModalHelper } from '~/app/logic/helpers';
 import { Session, Totals, Game } from '~/app/logic/models';
 import { TimerService } from '~/app/logic/services';
 import { Select } from '@ngxs/store';
@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { GameType } from '~/app/logic/enums';
+import { DialogHelper } from '~/app/logic/helpers/dialog.helper';
+import { AddNewGameComponent } from '../../modals/add-new-game/add-new-game.component';
 
 @Component({
   selector: 'ns-game-selector',
@@ -25,7 +27,14 @@ export class GameSelectorComponent implements OnInit {
   @Emitter(AppState.setCurrentSession)
   public setCurrentSession: Emittable<Session>;
 
-  constructor(private timerService: TimerService, private routerHelper: RouterHelper) { }
+  @Emitter(AppState.editGame)
+  public editGame: Emittable<{index: number, game: Game}>;
+
+  @Emitter(AppState.deleteGame)
+  public deleteGame: Emittable<number>;
+
+  constructor(private timerService: TimerService, private routerHelper: RouterHelper,
+    private dialogHelper: DialogHelper, private modalHelper: ModalHelper, private vcRef: ViewContainerRef) { }
 
   public selectedIndex: number = -1;
 
@@ -43,6 +52,27 @@ export class GameSelectorComponent implements OnInit {
 
   typeTap(type) {
     this.selectedType = type;
+  }
+
+  deleteTap() {
+    this.dialogHelper.confirmAlert('This will also delete all history with this game.', `Delete ${this.selectedGame.name}?`).then(ans => {
+      if (ans) {
+        this.deleteGame.emit(this.selectedIndex);
+      }
+    });
+  }
+
+  editTap() {
+    this.modalHelper.openModal(AddNewGameComponent, this.vcRef, false, { game: this.selectedGame}).then((res: Game) => {
+      if (!res) {
+        return;
+      }
+
+      this.selectedGame = res;
+
+      this.editGame.emit({ index: this.selectedIndex, game: res });
+
+    });
   }
 
   finishTap() {
