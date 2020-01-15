@@ -3,6 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActionbarComponent } from './actionbar/actionbar.component';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { AppTextFieldComponent } from './app-text-field/app-text-field.component';
+import { AppSwitchComponent } from './app-switch/app-switch.component';
 
 @NgModule({
     imports: [
@@ -11,11 +12,13 @@ import { AppTextFieldComponent } from './app-text-field/app-text-field.component
     exports: [
         NativeScriptCommonModule,
         ActionbarComponent,
-        AppTextFieldComponent
+        AppTextFieldComponent,
+        AppSwitchComponent
     ],
     declarations: [
         ActionbarComponent,
-        AppTextFieldComponent
+        AppTextFieldComponent,
+        AppSwitchComponent
     ],
     providers: [],
     schemas: [

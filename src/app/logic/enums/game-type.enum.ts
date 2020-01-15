@@ -3,5 +3,6 @@ export enum GameType {
     Fighting,
     MOBA,
     RTS,
-    BattleRoyal
+    BattleRoyal,
+    Custom
 }

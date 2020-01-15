@@ -1,6 +1,20 @@
 /* Add mobile styles for the component here.  */
 @import '../../../../app-variables';
 
+.top-layout {
+    .exit {
+        color: $lose;
+    }
+
+    .save {
+        color: gray;
+
+        &.enabled {
+            color: $win;
+        }
+    }
+}
+
 .main-label {
     color: $primary;
     font-size: 26;
@@ -18,4 +32,11 @@
     height: 50;
     margin-top: 10;
     margin-bottom: 10;
+}
+
+.test {
+    vertical-align: middle;
+    background-color: red;
+    color: blue;
+    margin-left: 20;
 }

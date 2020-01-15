@@ -2,7 +2,7 @@ import { State, Selector, StateContext, Store } from '@ngxs/store';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { LocalStorage } from '../storage/local-storage';
 import { Session } from '../models/session.model';
-import { Round, Game } from '../models';
+import { Round, Game, allStats } from '../models';
 import { GameResult, GameType } from '../enums';
 
 export interface AppStateModel {
@@ -44,11 +44,11 @@ export class AppState {
     @Receiver()
     public static async createInitialGames(ctx: StateContext<AppStateModel>) {
         const games: Game[] = [
-            { name: 'Modern Warfare', type: GameType.Shooter },
-            { name: 'Street Fighter 5', type: GameType.Fighting },
-            { name: 'League of Legends', type: GameType.MOBA },
-            { name: 'Apex', type: GameType.BattleRoyal },
-            { name: 'Halo 5', type: GameType.Shooter },
+            { name: 'Modern Warfare', type: GameType.Shooter, stats: allStats },
+            { name: 'Street Fighter 5', type: GameType.Fighting, stats: allStats },
+            { name: 'League of Legends', type: GameType.MOBA, stats: allStats },
+            { name: 'Apex', type: GameType.BattleRoyal, stats: allStats },
+            { name: 'Halo 5', type: GameType.Shooter, stats: allStats },
         ];
 
         ctx.patchState({

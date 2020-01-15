@@ -1,20 +1,31 @@
-<StackLayout class="modal-layout">
-    <Label class="main-label" [text]="title"></Label>
-    <StackLayout class="hr-light"></StackLayout>
-    <GridLayout class="modal-layout" rows="auto, auto, auto">
-        <TextField class="add-field" row="0" [text]="name"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
-
-        <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto">
-            <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
-            <Button class="primary-box-button" [class.selected]="selectedType === 1" col="1" row="0" text="Fighting" (tap)="typeTap(1)"></Button>
-            <Button class="primary-box-button" [class.selected]="selectedType === 2" col="0" row="1" text="MOBA" (tap)="typeTap(2)"></Button>
-            <Button class="primary-box-button" [class.selected]="selectedType === 3"col="1" row="1" text="RTS" (tap)="typeTap(3)"></Button>
-            <Button class="primary-box-button" [class.selected]="selectedType === 4"col="0" row="2" text="Battle Royal" (tap)="typeTap(4)"></Button>
-        </GridLayout>
-
-        <StackLayout row="3" >
-            <Button row="2" class="primary-disable-button" [isEnabled]="selectedType !== -1 && name !== ''" [text]="buttonText" (tap)="finishTap()"></Button>
-            <Button class="clear-button" text="Cancel" (tap)="finishTap(false)"></Button>
-        </StackLayout>
+<StackLayout class="top-layout">
+    <StackLayout width="100%" marginRight="5"></StackLayout> <!-- Need to add this so the modal is most of the width on andriod -->
+<GridLayout rows="auto, auto, *" class="modal-layout">
+    <GridLayout class="top-layout" row="0" columns="auto, *, auto" height="70">
+        <Button class="fa fa-button exit" text="&#xf00d;" col="0" (tap)="finishTap(false)"></Button>
+        <Label class="main-label" col="1" [text]="title"></Label>
+        <Button class="fa fa-button save" col="2" [isEnabled]="selectedType !== -1 && name !== ''" [class.enabled]="selectedType !== -1 && name !== ''" text="&#xf00c;" (tap)="finishTap()"></Button>
     </GridLayout>
+    <StackLayout row="1" class="hr-light"></StackLayout>
+    <ScrollView row="2">
+        <GridLayout class="modal-layout" rows="auto, auto, auto">
+            <TextField class="add-field" row="0" [text]="name"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
+
+            <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto">
+                <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 1" col="1" row="0" text="Fighting" (tap)="typeTap(1)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 2" col="0" row="1" text="MOBA" (tap)="typeTap(2)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 3"col="1" row="1" text="RTS" (tap)="typeTap(3)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 4"col="0" row="2" text="Battle Royal" (tap)="typeTap(4)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 5"col="1" row="2" text="Custom" (tap)="typeTap(5)"></Button>
+            </GridLayout>
+
+            <StackLayout row="2">
+                <StackLayout *ngFor="let stat of allStats">
+                    <app-switch></app-switch>
+                </StackLayout>
+            </StackLayout>
+        </GridLayout>
+    </ScrollView>
+</GridLayout>
 </StackLayout>
