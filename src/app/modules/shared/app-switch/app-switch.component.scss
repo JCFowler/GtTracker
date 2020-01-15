@@ -1,1 +1,14 @@
 /* Add mobile styles for the component here.  */
+@import '../../../../app-variables';
+
+GridLayout {
+    margin: 10;
+
+    Label {
+        font-size: 26;
+    }
+
+    Switch {
+        font-size: 30;
+    }
+}

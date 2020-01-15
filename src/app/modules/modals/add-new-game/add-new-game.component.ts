@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
-import { Game, Stat, allStats } from '~/app/logic/models';
+import { Game, Stat, allStats, getStats } from '~/app/logic/models';
 
 @Component({
   selector: 'ns-add-new-game',
@@ -16,7 +16,7 @@ export class AddNewGameComponent implements OnInit {
   public editGame: Game = undefined;
   public title = 'Add';
   public buttonText = 'Add';
-  public allStats: Stat[] = allStats;
+  public stats: Stat[] = [];
 
   ngOnInit() {
     if (this.mParams.context.game) {
@@ -25,6 +25,7 @@ export class AddNewGameComponent implements OnInit {
       this.buttonText = 'Edit game';
       this.name = this.editGame.name;
       this.selectedType = this.editGame.type;
+      this.stats = this.editGame.stats;
     }
 
     // this.allStats = [];
@@ -33,6 +34,7 @@ export class AddNewGameComponent implements OnInit {
 
   typeTap(type) {
     this.selectedType = type;
+    this.stats = getStats(type);
   }
 
   onTextChange(args) {
@@ -47,7 +49,7 @@ export class AddNewGameComponent implements OnInit {
     const game: Game = {
       name: this.name,
       type: this.selectedType,
-      stats: this.allStats
+      stats: this.stats
     };
 
     this.mParams.closeCallback(game);

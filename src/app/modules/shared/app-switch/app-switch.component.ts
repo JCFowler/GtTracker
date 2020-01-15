@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-switch',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-switch.component.scss']
 })
 export class AppSwitchComponent implements OnInit {
+
+  @Input() text: string;
+  @Input() checked = false;
 
   constructor() { }
 

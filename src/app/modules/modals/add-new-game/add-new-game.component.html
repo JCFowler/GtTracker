@@ -21,8 +21,9 @@
             </GridLayout>
 
             <StackLayout row="2">
-                <StackLayout *ngFor="let stat of allStats">
-                    <app-switch></app-switch>
+                <StackLayout *ngFor="let stat of stats">
+                    <app-switch [text]="stat.name" [checked]="true"></app-switch>
+                    <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
             </StackLayout>
         </GridLayout>
