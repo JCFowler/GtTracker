@@ -1,9 +1,9 @@
 <StackLayout class="top-layout">
     <StackLayout width="100%" marginRight="5"></StackLayout> <!-- Need to add this so the modal is most of the width on andriod -->
 <GridLayout rows="auto, auto, *" class="modal-layout">
-    <GridLayout class="top-layout" row="0" columns="auto, *, auto" height="70">
+    <GridLayout class="top-layout" row="0" columns="auto, *, auto">
         <Button class="fa fa-button exit" text="&#xf00d;" col="0" (tap)="finishTap(false)"></Button>
-        <Label class="main-label" col="1" [text]="title"></Label>
+        <Label class="main-label" col="1" textWrap="true" [text]="name"></Label>
         <Button class="fa fa-button save" col="2" [isEnabled]="selectedType !== -1 && name !== ''" [class.enabled]="selectedType !== -1 && name !== ''" text="&#xf00c;" (tap)="finishTap()"></Button>
     </GridLayout>
     <StackLayout row="1" class="hr-light"></StackLayout>
@@ -11,18 +11,21 @@
         <GridLayout class="modal-layout" rows="auto, auto, auto">
             <TextField class="add-field" row="0" [text]="name"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
 
-            <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto">
+            <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto, auto">
                 <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
                 <Button class="primary-box-button" [class.selected]="selectedType === 1" col="1" row="0" text="Fighting" (tap)="typeTap(1)"></Button>
                 <Button class="primary-box-button" [class.selected]="selectedType === 2" col="0" row="1" text="MOBA" (tap)="typeTap(2)"></Button>
                 <Button class="primary-box-button" [class.selected]="selectedType === 3"col="1" row="1" text="RTS" (tap)="typeTap(3)"></Button>
                 <Button class="primary-box-button" [class.selected]="selectedType === 4"col="0" row="2" text="Battle Royal" (tap)="typeTap(4)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 5"col="1" row="2" text="Custom" (tap)="typeTap(5)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 5"col="1" row="2" text="Sports" (tap)="typeTap(5)"></Button>
+                <Button class="primary-box-button" [class.selected]="selectedType === 6"col="0" row="3" text="Custom" (tap)="typeTap(6)"></Button>
             </GridLayout>
 
             <StackLayout row="2">
-                <StackLayout *ngFor="let stat of stats">
-                    <app-switch [text]="stat.name" [checked]="true"></app-switch>
+                <StackLayout row="1" class="hr-light"></StackLayout>
+                <Label class="stat-label" text="What stats to track?"></Label>
+                <StackLayout *ngFor="let stat of stats; let i = index">
+                    <app-switch [text]="stat.name" [checked]="stat.selected" (checkChanged)="onCheckChanged($event, i)"></app-switch>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
             </StackLayout>

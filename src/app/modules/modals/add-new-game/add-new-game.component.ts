@@ -14,22 +14,17 @@ export class AddNewGameComponent implements OnInit {
   public selectedType = -1;
   public name = '';
   public editGame: Game = undefined;
-  public title = 'Add';
   public buttonText = 'Add';
   public stats: Stat[] = [];
 
   ngOnInit() {
     if (this.mParams.context.game) {
       this.editGame = this.mParams.context.game;
-      this.title = 'Edit';
       this.buttonText = 'Edit game';
       this.name = this.editGame.name;
       this.selectedType = this.editGame.type;
-      this.stats = this.editGame.stats;
+      this.stats = JSON.parse(JSON.stringify(this.editGame.stats));
     }
-
-    // this.allStats = [];
-    // this.allStats.push(...allStats)
   }
 
   typeTap(type) {
@@ -39,6 +34,10 @@ export class AddNewGameComponent implements OnInit {
 
   onTextChange(args) {
     this.name = args.value;
+  }
+
+  onCheckChanged(checked: boolean, index: number) {
+    this.stats[index].selected = checked;
   }
 
   finishTap(sendData = true) {

@@ -1,4 +1,4 @@
 <GridLayout columns="*, auto">
-    <Label col="0" [text]="text"></Label>
-    <Switch col="1" [checked]="checked" scaleX="1.2" scaleY="1.2"></Switch>
+    <Label col="0" [text]="text" (tap)="labelTap()"></Label>
+    <Switch #switch col="1" [checked]="checked" scaleX="1.2" scaleY="1.2" (checkedChange)="onCheckedChange($event.object)"></Switch>
 </GridLayout>

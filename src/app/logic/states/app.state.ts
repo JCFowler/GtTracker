@@ -2,7 +2,7 @@ import { State, Selector, StateContext, Store } from '@ngxs/store';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { LocalStorage } from '../storage/local-storage';
 import { Session } from '../models/session.model';
-import { Round, Game, allStats, shooterStats, fightingStats, mobaStats, batleRoyalStats } from '../models';
+import { Round, Game, shooterStats, fightingStats, mobaStats, batleRoyalStats, sportsStats } from '../models';
 import { GameResult, GameType } from '../enums';
 
 export interface AppStateModel {
@@ -49,6 +49,7 @@ export class AppState {
             { name: 'League of Legends', type: GameType.MOBA, stats: mobaStats },
             { name: 'Apex', type: GameType.BattleRoyal, stats: batleRoyalStats },
             { name: 'Halo 5', type: GameType.Shooter, stats: shooterStats },
+            { name: 'Madden 20', type: GameType.Sports, stats: sportsStats },
         ];
 
         ctx.patchState({

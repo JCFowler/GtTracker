@@ -17,32 +17,52 @@
 
 .listview {
     GridLayout {
-        height: 50;
 
-        Label {
+        .game-name {
+            color: $primary;
             font-size: 24;
-            text-align: center;
             font-weight: 400;
+            margin-left: 15;
+            margin-top: 5;
+        }
+
+        .game-type {
+            color: black;
+            font-size: 16;
+            margin-left: 15;
+            margin-bottom: 5;
+        }
+
+        .fa {
+            font-size: 26;
+            width: 40;
+            padding: 0;
+        }
+
+        .delete {
+            margin-right: 10;
+            margin-left: 10;
+        }
+        
+        .icon-layout {
+            vertical-align: middle;
         }
 
         &.selected {
             background-color: $primary;
-            color: #ffffff;
+            Label {
+                color: #ffffff;
+            }
+
+            .edit {
+                color: #ffffff;
+            }
+
+            .delete {
+                color: #ef5350;
+            }
         }
     }
-}
-
-.edit {
-    margin-right: 20;
-    margin-left: 20;
-    color: $primary;
-}
-
-.delete {
-    margin-right: 20;
-    margin-left: 20;
-    color: $lose;
-    border-color: $lose;
 }
 
 .add-field {
