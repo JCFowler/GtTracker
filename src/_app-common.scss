@@ -1,8 +1,19 @@
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
 // Font icon class
-.fa {
-    font-family: "FontAwesome";
+.far {
+    font-family: "Font Awesome 5 Free", "fa-regular-400";
+    font-weight: 400; 
+}
+
+.fab {
+    font-family: "Font Awesome 5 Free", "fa-brands-400";
+    font-weight: 400; 
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 900; 
 }
 
 Button {
@@ -99,7 +110,7 @@ Button {
     vertical-align: middle;
 
     &:highlighted {
-        background-color: #eeeeee;
+        opacity: .8;
     }
 }
 

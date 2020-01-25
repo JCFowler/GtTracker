@@ -1,12 +1,36 @@
 /* Add mobile styles for the component here.  */
 @import '../../../../app-variables';
 
+.top-layout {
+    border-width: 2;
+    border-radius: 5;
+}
+
 .main-label {
     font-size: 32;
     text-align: center;
     padding: 10;
     border-radius: 5;
-    margin: 5;
+    margin-right: 5;
     margin-bottom: 15;
     width: 100%;
+}
+
+.dots {
+    color: $primary;
+    margin-top: 5;
+
+    StackLayout {
+        text-align: center;
+        vertical-align: middle;
+
+        .fa-button {
+            padding: 10;
+        }
+    }
+
+    Label {
+        font-size: 14;
+        margin: 3;
+    }
 }

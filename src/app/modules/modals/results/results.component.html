@@ -1,14 +1,29 @@
 <StackLayout class="modal-layout">
-    <Label [class]="result + ' main-label'" [text]="result"></Label>
-    
-    <Label text="Kills"></Label>
-    <TextField *ngIf="!isIOS" [class.focused]="focusIndex === 0" hint="Kills" keyboardType="number" returnKeyType="next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></TextField>
-    <NumericTextField *ngIf="isIOS" [class.focused]="focusIndex === 0" noDecimals="true" hint="Kills" keyboardType="number" returnKeyType="next" returnKeyTitle="Next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></NumericTextField>
+    <Label marginRight="5" width="100%" height="0" text=""></Label>  <!-- Used to have full width for modal -->
+    <GridLayout rows="auto, auto, auto">
+        <GridLayout row="0" columns="auto, *, auto">
+            <Button class="fa fa-button exit" text="&#xf00d;" col="0" (tap)="closeModal(false)"></Button>
+            <Label [class]="result + ' main-label'" col="1" textWrap="true" [text]="result"></Label>
+            <Button class="fa fa-button save" col="2" text="&#xf00c;" (tap)="closeModal()"></Button>
+        </GridLayout>
+        <StackLayout row="1" class="hr-light"></StackLayout>
+        <StackLayout *ngIf="currentSession$ | async; let session" row="2">
+            <Label [text]="session.game.stats[currentStep].name"></Label>
+            <TextField *ngIf="!isIOS" [class.focused]="focusIndex === 0" hint="Kills" keyboardType="number" returnKeyType="next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></TextField>
+            <NumericTextField *ngIf="isIOS" [class.focused]="focusIndex === 0" noDecimals="true" hint="Kills" keyboardType="number" returnKeyType="next" returnKeyTitle="Next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></NumericTextField>
+            <GridLayout class="dots" columns="auto, *, auto, *, auto" height="45">
+                <Button col="0" class="fas fa-button" fontSize="22" text="&#xf053;" (tap)="nextStep(-1)"></Button>
+                <StackLayout col="2" orientation="horizontal">
+                    <StackLayout *ngFor="let stat of session.game.stats; let i = index">
+                        <Label [class]="getClass(i)" text="&#xf111;"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <Button col="4" class="fas fa-button" fontSize="22" text="&#xf054;" (tap)="nextStep(1)"></Button>
+            </GridLayout>
+        </StackLayout>
 
-    <Label text="Deaths"></Label>
-    <TextField *ngIf="!isIOS" [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></TextField>
-    <NumericTextField *ngIf="isIOS" [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" returnKeyTitle="Submit" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></NumericTextField>
-
-    <Button class="primary-button" text="Submit" (tap)="closeModal()"></Button>
-    <Button text="Cancel" (tap)="closeModal(false)"></Button>
+        <!-- <Label text="Deaths"></Label>
+        <TextField *ngIf="!isIOS" [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></TextField>
+        <NumericTextField *ngIf="isIOS" [class.focused]="focusIndex === 1" hint="Deaths" keyboardType="number" returnKeyTitle="Submit" (returnPress)="returnPress(1)" (focus)="isFocused($event.object, 1)" (loaded)="loadTextField($event.object)"></NumericTextField> -->
+    </GridLayout>
 </StackLayout>

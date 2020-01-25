@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular/directives/dialogs';
 import { isIOS } from 'tns-core-modules/ui/page/page';
 import { TextField } from '@nativescript/core';
+import { Select } from '@ngxs/store';
+import { AppState } from '~/app/logic/states';
+import { Observable } from 'rxjs';
+import { Session } from '~/app/logic/models';
 
 @Component({
   selector: 'ns-results',
@@ -10,16 +14,40 @@ import { TextField } from '@nativescript/core';
 })
 export class ResultsComponent implements OnInit {
 
+  @Select(AppState.getCurrentSession) currentSession$: Observable<Session>;
+
   constructor(private mParams: ModalDialogParams) { }
 
   public focusIndex: number;
   public textFields: TextField[] = [];
   public result: string;
   public isIOS: boolean;
+  public steps: number;
+  public currentStep = 0;
 
   ngOnInit() {
     this.isIOS = isIOS;
     this.result = this.mParams.context.result;
+    this.currentSession$.subscribe(session => {
+      this.steps = session.game.stats.length;
+    });
+  }
+
+  getClass(index: number): string {
+    if (index === this.currentStep) {
+      return 'fas';
+    }
+    return 'far';
+  }
+
+  nextStep(num: number) {
+    const newNum = this.currentStep + num;
+    console.log(newNum, this.currentStep)
+    if (newNum < 0 || newNum === this.steps) {
+      console.log('Stop')
+    } else {
+      this.currentStep = newNum;
+    }
   }
 
   closeModal(sendData = true) {
