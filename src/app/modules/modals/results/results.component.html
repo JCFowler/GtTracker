@@ -8,9 +8,7 @@
         </GridLayout>
         <StackLayout row="1" class="hr-light"></StackLayout>
         <StackLayout *ngIf="currentSession$ | async; let session" row="2">
-            <Label [text]="session.game.stats[currentStep].name"></Label>
-            <TextField *ngIf="!isIOS" [class.focused]="focusIndex === 0" hint="Kills" keyboardType="number" returnKeyType="next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></TextField>
-            <NumericTextField *ngIf="isIOS" [class.focused]="focusIndex === 0" noDecimals="true" hint="Kills" keyboardType="number" returnKeyType="next" returnKeyTitle="Next" (returnPress)="returnPress(0)" (focus)="isFocused($event.object, 0)" (loaded)="loadTextField($event.object)"></NumericTextField>
+            <app-stat [stat]="session.game.stats[currentStep]" [returnType]="getReturnType()" (return)="nextStep(1)" (textChange)="onTextChange($event)"></app-stat>
             <GridLayout class="dots" columns="auto, *, auto, *, auto" height="45">
                 <Button col="0" class="fas fa-button" fontSize="22" text="&#xf053;" (tap)="nextStep(-1)"></Button>
                 <StackLayout col="2" orientation="horizontal">

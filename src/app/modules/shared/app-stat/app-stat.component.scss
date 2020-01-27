@@ -1,0 +1,18 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../app-variables';
+
+.title {
+    color: $primary;
+    font-size: 24;
+}
+
+TextField {
+    border-bottom-width: 1;
+    border-color: #333333;
+    margin-bottom: 15;
+
+    &.focused {
+        border-bottom-width: 2;
+        border-color: $primary;
+    }
+}

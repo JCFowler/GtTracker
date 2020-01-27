@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular/directives/dialogs';
-import { isIOS } from 'tns-core-modules/ui/page/page';
-import { TextField } from '@nativescript/core';
 import { Select } from '@ngxs/store';
 import { AppState } from '~/app/logic/states';
 import { Observable } from 'rxjs';
-import { Session } from '~/app/logic/models';
+import { Session, Stat } from '~/app/logic/models';
+import { borderTopRightRadiusProperty } from 'tns-core-modules/ui/page/page';
 
 @Component({
   selector: 'ns-results',
@@ -18,18 +17,16 @@ export class ResultsComponent implements OnInit {
 
   constructor(private mParams: ModalDialogParams) { }
 
-  public focusIndex: number;
-  public textFields: TextField[] = [];
   public result: string;
-  public isIOS: boolean;
-  public steps: number;
   public currentStep = 0;
+  public stats: Stat[];
 
   ngOnInit() {
-    this.isIOS = isIOS;
     this.result = this.mParams.context.result;
     this.currentSession$.subscribe(session => {
-      this.steps = session.game.stats.length;
+      this.stats = JSON.parse(JSON.stringify(session.game.stats));
+      console.dir(this.stats)
+      // this.stats = session.game.stats;
     });
   }
 
@@ -40,11 +37,23 @@ export class ResultsComponent implements OnInit {
     return 'far';
   }
 
+  getReturnType() {
+    if (this.currentStep === this.stats.length - 1) {
+      return 'done';
+    } else {
+      return 'next';
+    }
+  }
+
+  onTextChange(args: string) {
+    this.stats[this.currentStep].answer = args;
+    console.log(this.stats[this.currentStep].answer)
+  }
+
   nextStep(num: number) {
     const newNum = this.currentStep + num;
-    console.log(newNum, this.currentStep)
-    if (newNum < 0 || newNum === this.steps) {
-      console.log('Stop')
+    if (newNum < 0 || newNum === this.stats.length) {
+      console.log('Stop');
     } else {
       this.currentStep = newNum;
     }
@@ -54,36 +63,7 @@ export class ResultsComponent implements OnInit {
     if (!sendData) {
       this.mParams.closeCallback(undefined);
     }
-    const res: string[] = [];
-    this.textFields.forEach(tf => {
-      res.push(tf.text);
-    });
-    this.mParams.closeCallback(res);
-  }
 
-  isFocused(textField, index) {
-    textField.focus();
-    this.focusIndex = index;
-  }
-
-  returnPress(index: number) {
-    if (index !== this.textFields.length - 1) {
-      if (isIOS) {
-        setTimeout(() => {
-          this.textFields[index + 1].focus();
-        }, 100);
-      }
-    } else {
-      this.closeModal();
-    }
-  }
-
-  loadTextField(args: TextField) {
-    if (this.textFields.length === 0) {
-      setTimeout(() => {
-        args.focus();
-      }, 100);
-    }
-    this.textFields.push(args);
+    this.mParams.closeCallback(this.stats);
   }
 }

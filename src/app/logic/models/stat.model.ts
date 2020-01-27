@@ -5,6 +5,7 @@ export interface Stat {
     name: string;
     type: StatType;
     selected: boolean;
+    answer?: string | number;
 }
 
 export function getStats(type: GameType): Stat[] {

@@ -4,6 +4,7 @@ import { ActionbarComponent } from './actionbar/actionbar.component';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { AppTextFieldComponent } from './app-text-field/app-text-field.component';
 import { AppSwitchComponent } from './app-switch/app-switch.component';
+import { AppStatComponent } from './app-stat/app-stat.component';
 
 @NgModule({
     imports: [
@@ -13,12 +14,14 @@ import { AppSwitchComponent } from './app-switch/app-switch.component';
         NativeScriptCommonModule,
         ActionbarComponent,
         AppTextFieldComponent,
-        AppSwitchComponent
+        AppSwitchComponent,
+        AppStatComponent
     ],
     declarations: [
         ActionbarComponent,
         AppTextFieldComponent,
-        AppSwitchComponent
+        AppSwitchComponent,
+        AppStatComponent
     ],
     providers: [],
     schemas: [

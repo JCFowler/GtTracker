@@ -16,6 +16,14 @@
     width: 100%;
 }
 
+.exit {
+    color: $lose;
+}
+
+.save {
+    color: $win;
+}
+
 .dots {
     color: $primary;
     margin-top: 5;

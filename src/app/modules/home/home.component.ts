@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Session } from '~/app/logic/models/session.model';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { first } from 'rxjs/operators';
-import { Round } from '~/app/logic/models';
+import { Round, Stat } from '~/app/logic/models';
 import { GameResult } from '~/app/logic/enums';
 import * as dialogs from 'tns-core-modules/ui/dialogs';
 import { GlobalHelper, ModalHelper, RouterHelper } from '~/app/logic/helpers';
@@ -46,8 +46,8 @@ export class HomeComponent implements OnInit {
                 this.timerService.startTimer(new Date(session.startTime));
 
                 for (let i = 0; i < session.rounds.length; i++) {
-                    this.kills += session.rounds[i].kills;
-                    this.deaths += session.rounds[i].deaths;
+                    // this.kills += session.rounds[i].kills;
+                    // this.deaths += session.rounds[i].deaths;
                 }
             }
         });
@@ -77,17 +77,16 @@ export class HomeComponent implements OnInit {
 
     gameFinished(result: GameResult) {
         this.modalHelper.openModal(ResultsComponent, this.vcRef, false,
-            { result: GameResult[result] }).then((res: string[]) => {
+            { result: GameResult[result] }).then((res: Stat[]) => {
             if (res) {
                 const game: Round = {
                     result: result,
                     time: new Date(),
-                    kills: +res[0],
-                    deaths: +res[1]
+                    stats: res
                 };
 
-                this.kills += game.kills;
-                this.deaths += game.deaths;
+                // this.kills += game.kills;
+                // this.deaths += game.deaths;
 
                 this.updateCurrentSessionGame.emit(game);
             }
