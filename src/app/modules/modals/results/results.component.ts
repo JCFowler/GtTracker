@@ -19,14 +19,18 @@ export class ResultsComponent implements OnInit {
 
   public result: string;
   public currentStep = 0;
-  public stats: Stat[];
+  public stats: Stat[] = [];
 
   ngOnInit() {
     this.result = this.mParams.context.result;
     this.currentSession$.subscribe(session => {
-      this.stats = JSON.parse(JSON.stringify(session.game.stats));
-      console.dir(this.stats)
-      // this.stats = session.game.stats;
+      const currentStats = JSON.parse(JSON.stringify(session.game.stats));
+
+      currentStats.forEach(s => {
+        if (s.selected) {
+          this.stats.push(s);
+        }
+      });
     });
   }
 
@@ -47,13 +51,15 @@ export class ResultsComponent implements OnInit {
 
   onTextChange(args: string) {
     this.stats[this.currentStep].answer = args;
-    console.log(this.stats[this.currentStep].answer)
   }
 
-  nextStep(num: number) {
+  nextStep(num: number, forceFinish = false) {
     const newNum = this.currentStep + num;
     if (newNum < 0 || newNum === this.stats.length) {
       console.log('Stop');
+      if (forceFinish) {
+        this.closeModal();
+      }
     } else {
       this.currentStep = newNum;
     }

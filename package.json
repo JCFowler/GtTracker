@@ -31,6 +31,7 @@
     "nativescript-angular": "^8.20.3",
     "nativescript-numeric-keyboard": "^4.3.1",
     "nativescript-theme-core": "~1.0.6",
+    "nativescript-ui-listview": "^7.0.1",
     "nativescript-ui-sidedrawer": "~7.0.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",

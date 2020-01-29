@@ -12,6 +12,7 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { ResultsComponent } from './modules/modals/results/results.component';
 import { registerElement } from 'nativescript-angular';
 import { AddNewGameComponent } from './modules/modals/add-new-game/add-new-game.component';
+import { NativeScriptUIListViewModule } from 'nativescript-ui-listview/angular';
 
 registerElement('NumericTextField', () => require('nativescript-numeric-keyboard').NumericKeyboardView);
 
@@ -31,6 +32,7 @@ const routes: Routes = [
         NativeScriptRouterModule.forRoot(routes),
         NativeScriptModule,
         NativeScriptUISideDrawerModule,
+        NativeScriptUIListViewModule,
         SharedModule,
         NgxsModule.forRoot([ ...STATES ]),
         NgxsEmitPluginModule.forRoot(),

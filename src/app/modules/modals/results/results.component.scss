@@ -24,6 +24,12 @@
     color: $win;
 }
 
+.fa-button {
+    &.disabled {
+        color: $tie;
+    }
+}
+
 .dots {
     color: $primary;
     margin-top: 5;

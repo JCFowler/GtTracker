@@ -35,8 +35,4 @@ export class AppSwitchComponent implements OnInit {
     //   }, 100);
     // }
   }
-
-  labelTap() {
-    this.switch.nativeElement.checked = !this.switch.nativeElement.checked;
-  }
 }

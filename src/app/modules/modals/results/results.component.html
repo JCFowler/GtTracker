@@ -2,21 +2,21 @@
     <Label marginRight="5" width="100%" height="0" text=""></Label>  <!-- Used to have full width for modal -->
     <GridLayout rows="auto, auto, auto">
         <GridLayout row="0" columns="auto, *, auto">
-            <Button class="fa fa-button exit" text="&#xf00d;" col="0" (tap)="closeModal(false)"></Button>
+            <Button class="fas fa-button exit" text="&#xf00d;" col="0" (tap)="closeModal(false)"></Button>
             <Label [class]="result + ' main-label'" col="1" textWrap="true" [text]="result"></Label>
-            <Button class="fa fa-button save" col="2" text="&#xf00c;" (tap)="closeModal()"></Button>
+            <Button class="fas fa-button save" col="2" text="&#xf00c;" (tap)="closeModal()"></Button>
         </GridLayout>
         <StackLayout row="1" class="hr-light"></StackLayout>
         <StackLayout *ngIf="currentSession$ | async; let session" row="2">
-            <app-stat [stat]="session.game.stats[currentStep]" [returnType]="getReturnType()" (return)="nextStep(1)" (textChange)="onTextChange($event)"></app-stat>
+            <app-stat [stat]="stats[currentStep]" [returnType]="getReturnType()" (return)="nextStep(1, true)" (textChange)="onTextChange($event)"></app-stat>
             <GridLayout class="dots" columns="auto, *, auto, *, auto" height="45">
-                <Button col="0" class="fas fa-button" fontSize="22" text="&#xf053;" (tap)="nextStep(-1)"></Button>
+                <Button col="0" class="fas fa-button" [class.disabled]="currentStep === 0" fontSize="22" text="&#xf053;" (tap)="nextStep(-1)"></Button>
                 <StackLayout col="2" orientation="horizontal">
-                    <StackLayout *ngFor="let stat of session.game.stats; let i = index">
+                    <StackLayout *ngFor="let stat of stats; let i = index">
                         <Label [class]="getClass(i)" text="&#xf111;"></Label>
                     </StackLayout>
                 </StackLayout>
-                <Button col="4" class="fas fa-button" fontSize="22" text="&#xf054;" (tap)="nextStep(1)"></Button>
+                <Button col="4" class="fas fa-button" [class.disabled]="currentStep === stats.length -1" fontSize="22" text="&#xf054;" (tap)="nextStep(1)"></Button>
             </GridLayout>
         </StackLayout>
 

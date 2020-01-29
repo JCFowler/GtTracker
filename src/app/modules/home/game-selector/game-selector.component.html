@@ -6,8 +6,8 @@
                 <Label class="game-name" row="0" col="0" [text]="game.name"></Label>
                 <Label class="game-type" row="1" col="0" [text]="gameType[game.type]"></Label>
                 <GridLayout class="icon-layout" [class.selected]="i===selectedIndex" row="0" col="1" rowSpan="2" columns="auto, auto">
-                    <Button *ngIf="i===selectedIndex" class="fa fa-button edit" text="&#xf044;" col="0" (tap)="editTap()"></Button>
-                    <Button *ngIf="i===selectedIndex" class="fa fa-button delete" text="&#xf1f8;" col="1" (tap)="deleteTap()"></Button>
+                    <Button *ngIf="i===selectedIndex" class="fas fa-button edit" text="&#xf044;" col="0" (tap)="editTap()"></Button>
+                    <Button *ngIf="i===selectedIndex" class="fas fa-button delete" text="&#xf1f8;" col="1" (tap)="deleteTap()"></Button>
                 </GridLayout>
             </GridLayout>
         </ng-template>

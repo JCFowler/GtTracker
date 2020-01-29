@@ -1,6 +1,5 @@
 <StackLayout>
     <Label class="title" [text]="stat.name"></Label>
-    <Label class="title" [text]="stat.answer"></Label>
 
     <StackLayout [ngSwitch]="stat.type">
         <GridLayout *ngSwitchCase="statType.Text">
@@ -8,7 +7,7 @@
         </GridLayout>
 
         <GridLayout *ngSwitchCase="statType.Number">
-            <TextField [class.focused]="true" [hint]="stat.name" keyboardType="number" [returnKeyType]="returnType" (returnPress)="returnPress()" (loaded)="loadTextField($event.object)" (textChange)="onTextChange($event)"></TextField>
+            <TextField [class.focused]="true" [text]="stat.answer" [hint]="stat.name" keyboardType="number" [returnKeyType]="returnType" (returnPress)="returnPress()" (loaded)="loadTextField($event.object)" (textChange)="onTextChange($event)"></TextField>
         </GridLayout>
 
         <GridLayout *ngSwitchCase="statType.Switch">
