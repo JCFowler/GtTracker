@@ -96,6 +96,15 @@ export class AppState {
     }
 
     @Receiver()
+    public static async updateGames(ctx: StateContext<AppStateModel>, action: EmitterAction<Game[]>) {
+        ctx.patchState({
+            games: action.payload
+        });
+        LocalStorage.setAppState(ctx.getState());
+        console.log('Games were updated.');
+    }
+
+    @Receiver()
     public static async setCurrentSession(ctx: StateContext<AppStateModel>, action: EmitterAction<Session>) {
         ctx.patchState({
             currentSession: action.payload

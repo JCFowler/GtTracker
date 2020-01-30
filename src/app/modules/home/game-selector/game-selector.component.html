@@ -1,17 +1,25 @@
 <ns-actionbar title="Select game" [showBack]="true" [showAdd]="true"></ns-actionbar>
 <GridLayout rows="*, auto, auto">
-    <ListView *ngIf="games$ | async; let games" row="0" class="listview" [items]="games" (itemTap)="onGameTap($event)">
-        <ng-template let-game="item" let-i="index" let-odd="odd" let-even="even">
+    <RadListView *ngIf="games$ | async; let games" row="0" class="listview" [items]="games" (itemTap)="onGameTap($event)" (itemReordered)="onItemReordered($event)" 
+    swipeActions="true" (itemSwipeProgressEnded)="onSwipeCellFinished($event)" (itemSwipeProgressStarted)="onSwipeCellStarted($event)" (itemSwipeProgressChanged)="onCellSwiping($event)">
+        <ng-template tkListItemTemplate let-game="item" let-i="index" let-odd="odd" let-even="even">
             <GridLayout [class.selected]="i===selectedIndex" rows="auto, auto" columns="*, auto">
                 <Label class="game-name" row="0" col="0" [text]="game.name"></Label>
                 <Label class="game-type" row="1" col="0" [text]="gameType[game.type]"></Label>
                 <GridLayout class="icon-layout" [class.selected]="i===selectedIndex" row="0" col="1" rowSpan="2" columns="auto, auto">
-                    <Button *ngIf="i===selectedIndex" class="fas fa-button edit" text="&#xf044;" col="0" (tap)="editTap()"></Button>
-                    <Button *ngIf="i===selectedIndex" class="fas fa-button delete" text="&#xf1f8;" col="1" (tap)="deleteTap()"></Button>
+                    <Button class="fas fa-button edit" text="&#xf044;" col="0" (tap)="editTap(i)"></Button>
+                    <Button class="fas fa-button delete" text="&#xf1f8;" col="1" (tap)="deleteTap(i)"></Button>
                 </GridLayout>
             </GridLayout>
         </ng-template>
-    </ListView>
-
+        <GridLayout *tkListItemSwipeTemplate columns="auto, *, auto" class="gridLayoutLayout">
+            <StackLayout id="mark-view" col="0" class="markViewStackLayout" (tap)="onLeftSwipeClick($event)">
+               <Label text="mark" class="swipeTemplateLabel" verticalAlignment="center" horizontalAlignment="center"></Label>
+           </StackLayout>
+           <StackLayout id="delete-view" col="2" class="deleteViewStackLayout" (tap)="onRightSwipeClick($event)">
+               <Label text="delete" class="swipeTemplateLabel" verticalAlignment="center" horizontalAlignment="center"></Label>
+           </StackLayout>
+       </GridLayout>
+    </RadListView>
     <Button class="primary-disable-button" row="2" [isEnabled]="selectedIndex !== -1" text="Start Session" (tap)="finishTap()"></Button>
 </GridLayout>

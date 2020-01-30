@@ -11,7 +11,8 @@ export class ModalHelper {
         const options: ModalDialogOptions = {
             viewContainerRef: vcRef,
             fullscreen: fullscreen,
-            context: context
+            context: context,
+            animated: true
         };
 
         return this.modalService.showModal(component, options);

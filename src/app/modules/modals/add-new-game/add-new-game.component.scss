@@ -24,6 +24,18 @@
     margin-bottom: 10;
 }
 
+.question-layout {
+    Label {
+        font-size: 16;
+        color: $text-primary;
+    }
+
+    .far {
+        font-size: 12;
+        margin-top: 10;
+    }
+}
+
 .add-field {
     font-size: 20;
     height: 50;

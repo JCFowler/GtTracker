@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
-import { Game, Stat, allStats, getStats } from '~/app/logic/models';
+import { Game, Stat, getStats } from '~/app/logic/models';
 import { ListViewEventData } from 'nativescript-ui-listview';
 import { DialogHelper } from '~/app/logic/helpers/dialog.helper';
 
@@ -38,7 +38,7 @@ export class AddNewGameComponent implements OnInit {
     this.dialogHelper.alert(
       `Top 3 will be visible during session.
 Press and hold to be able to move the stats around.`,
-      'Help');
+      'About Stats');
   }
 
   onTextChange(args) {
@@ -50,16 +50,18 @@ Press and hold to be able to move the stats around.`,
   }
 
   public onItemReordered(args: ListViewEventData) {
-    console.log("Item reordered. Old index: " + args.index + " " + "new index: " + args.data.targetIndex);
-  }
-
-  onItemTap(args) {
-    console.log('hi')
+    console.log('Item reordered. Old index: ' + args.index + ' new index: ' + args.data.targetIndex);
   }
 
   finishTap(sendData = true) {
     if (!sendData) {
       this.mParams.closeCallback();
+    }
+
+    for (let i = this.stats.length - 1; i > 0 ; i--) {
+      if (!this.stats[i].selected) {
+        this.stats.push(this.stats.splice(i, 1)[0]);
+      }
     }
 
     const game: Game = {

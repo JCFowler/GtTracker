@@ -17,7 +17,6 @@
 
 .listview {
     GridLayout {
-
         .game-name {
             color: $primary;
             font-size: 24;
@@ -33,7 +32,8 @@
             margin-bottom: 5;
         }
 
-        .fa {
+        .fas {
+            color: #ffffff;
             font-size: 26;
             width: 40;
             padding: 0;

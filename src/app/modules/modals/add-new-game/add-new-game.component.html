@@ -7,47 +7,35 @@
         <Button class="fas fa-button save" col="2" [isEnabled]="selectedType !== -1 && name !== ''" [class.enabled]="selectedType !== -1 && name !== ''" text="&#xf00c;" (tap)="finishTap()"></Button>
     </GridLayout>
     <StackLayout row="1" class="hr-light"></StackLayout>
-    <ScrollView row="2">
-        <GridLayout class="modal-layout" rows="auto, auto, auto">
-            <TextField class="add-field" row="0" [text]="name"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
+    <GridLayout class="modal-layout" row="2" rows="auto, auto, *">
+        <TextField class="add-field" row="0" [text]="name"  returnKeyType="done" col="0" (textChange)="onTextChange($event)" colSpan="2" hint="Game name"></TextField>
 
-            <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto, auto">
-                <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 1" col="1" row="0" text="Fighting" (tap)="typeTap(1)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 2" col="0" row="1" text="MOBA" (tap)="typeTap(2)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 3"col="1" row="1" text="RTS" (tap)="typeTap(3)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 4"col="0" row="2" text="Battle Royal" (tap)="typeTap(4)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 5"col="1" row="2" text="Sports" (tap)="typeTap(5)"></Button>
-                <Button class="primary-box-button" [class.selected]="selectedType === 6"col="0" row="3" text="Custom" (tap)="typeTap(6)"></Button>
-            </GridLayout>
-
-            <StackLayout row="2">
-                <StackLayout row="1" class="hr-light"></StackLayout>
-                <GridLayout columns="*, auto, auto, *" class="m-t-5" backgroundColor="red">
-                    <Label class="stat-label" col="1" text="What stats to track?"></Label>
-                    <Label col="2" text="&#xf059;" class="far"></Label>
-                </GridLayout>
-                <RadListView [items]="stats" itemReorder="true" height="500" (itemTap)="onItemTap($event)" (itemReordered)="onItemReordered($event)">
-                    <ng-template tkListItemTemplate let-item="item" let-i="index">
-                        <StackLayout>
-                            <app-switch [text]="item.name" [checked]="item.selected" (checkChanged)="onCheckChanged($event, i)"></app-switch>
-                            <StackLayout class="hr-light"></StackLayout>
-                        </StackLayout>
-                    </ng-template>
-                </RadListView>
-                <!-- <StackLayout *ngFor="let stat of stats; let i = index">
-                    <GridLayout columns="*, auto">
-                        <Label col="0" [text]="stat.name" (tap)="labelTap()"></Label>
-                        <Label col="1" class="far" text="&#xf070;" (tap)="labelTap()"></Label>
-                    </GridLayout>
-                    <StackLayout class="hr-light"></StackLayout>
-                </StackLayout> -->
-                <!-- <StackLayout *ngFor="let stat of stats; let i = index">
-                    <app-switch [text]="stat.name" [checked]="stat.selected" (checkChanged)="onCheckChanged($event, i)"></app-switch>
-                    <StackLayout class="hr-light"></StackLayout>
-                </StackLayout> -->
-            </StackLayout>
+        <GridLayout class="m-b-10" row="1" columns="*, *" rows="auto, auto, auto, auto">
+            <Button class="primary-box-button" [class.selected]="selectedType === 0" col="0" row="0" text="Shooter" (tap)="typeTap(0)"></Button>
+            <Button class="primary-box-button" [class.selected]="selectedType === 1" col="1" row="0" text="Fighting" (tap)="typeTap(1)"></Button>
+            <Button class="primary-box-button" [class.selected]="selectedType === 2" col="0" row="1" text="MOBA" (tap)="typeTap(2)"></Button>
+            <Button class="primary-box-button" [class.selected]="selectedType === 3"col="1" row="1" text="RTS" (tap)="typeTap(3)"></Button>
+            <Button class="primary-box-button" [class.selected]="selectedType === 4"col="0" row="2" text="Battle Royal" (tap)="typeTap(4)"></Button>
+            <Button class="primary-box-button" [class.selected]="selectedType === 5"col="1" row="2" text="Sports" (tap)="typeTap(5)"></Button>
+            <Button class="primary-box-button" [class.selected]="selectedType === 6"col="0" row="3" text="Custom" (tap)="typeTap(6)"></Button>
         </GridLayout>
-    </ScrollView>
+
+        <GridLayout row="2" rows="auto, auto, *">
+            <StackLayout row="0" class="hr-light"></StackLayout>
+            <GridLayout row="1" rows="auto, auto" columns="*, auto, auto, *" class="question-layout">
+                <Label class="stat-label" row="0" col="1" text="What stats to track?" (tap)="onQuestionTap()"></Label>
+                <Label row="0" col="2" text="&#xf059;" ios:marginTop="-5" class="far ass" (tap)="onQuestionTap()"></Label>
+                <StackLayout row="1" col="0" colSpan="4" class="hr-light"></StackLayout>
+            </GridLayout>
+            <RadListView row="2" [items]="stats" itemReorder="true" (itemReordered)="onItemReordered($event)">
+                <ng-template tkListItemTemplate let-item="item" let-i="index">
+                    <StackLayout>
+                        <app-switch [text]="item.name" [checked]="item.selected" (checkChanged)="onCheckChanged($event, i)"></app-switch>
+                        <StackLayout class="hr-light"></StackLayout>
+                    </StackLayout>
+                </ng-template>
+            </RadListView>
+        </GridLayout>
+    </GridLayout>
 </GridLayout>
 </StackLayout>

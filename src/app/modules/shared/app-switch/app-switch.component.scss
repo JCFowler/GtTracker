@@ -5,7 +5,12 @@ GridLayout {
     margin: 10;
 
     Label {
+        color: $text-secondary;
         font-size: 26;
+
+        &.selected {
+            color: $primary;
+        }
     }
 
     Switch {

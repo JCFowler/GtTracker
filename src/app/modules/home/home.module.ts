@@ -4,6 +4,7 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
 import { GameSelectorComponent } from './game-selector/game-selector.component';
+import { NativeScriptUIListViewModule } from 'nativescript-ui-listview/angular/listview-directives';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         NativeScriptRouterModule.forChild(routes),
+        NativeScriptUIListViewModule,
         SharedModule
     ],
     exports: [],

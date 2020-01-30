@@ -10,6 +10,7 @@ import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { GameType } from '~/app/logic/enums';
 import { DialogHelper } from '~/app/logic/helpers/dialog.helper';
 import { AddNewGameComponent } from '../../modals/add-new-game/add-new-game.component';
+import { ListViewEventData } from 'nativescript-ui-listview';
 
 @Component({
   selector: 'ns-game-selector',
@@ -26,6 +27,9 @@ export class GameSelectorComponent implements OnInit {
 
   @Emitter(AppState.setCurrentSession)
   public setCurrentSession: Emittable<Session>;
+
+  @Emitter(AppState.updateGames)
+  public updateGames: Emittable<Game[]>;
 
   @Emitter(AppState.editGame)
   public editGame: Emittable<{index: number, game: Game}>;
@@ -54,7 +58,11 @@ export class GameSelectorComponent implements OnInit {
     this.selectedType = type;
   }
 
-  deleteTap() {
+  deleteTap(index: number) {
+    if (this.selectedIndex !== index) {
+      return;
+    }
+
     this.dialogHelper.confirmAlert('This will also delete all history with this game.', `Delete ${this.selectedGame.name}?`).then(ans => {
       if (ans) {
         this.deleteGame.emit(this.selectedIndex);
@@ -62,16 +70,30 @@ export class GameSelectorComponent implements OnInit {
     });
   }
 
-  editTap() {
-    this.modalHelper.openModal(AddNewGameComponent, this.vcRef, false, { game: this.selectedGame}).then((res: Game) => {
+  editTap(index: number) {
+    if (this.selectedIndex !== index) {
+      return;
+    }
+
+    this.modalHelper.openModal(AddNewGameComponent, this.vcRef, true, { game: this.selectedGame}).then((res: Game) => {
       if (!res) {
         return;
       }
 
       this.selectedGame = res;
-
       this.editGame.emit({ index: this.selectedIndex, game: res });
+    });
+  }
 
+  public onItemReordered(args: ListViewEventData) {
+    if (this.selectedIndex === args.index) {
+      this.selectedIndex = args.data.targetIndex;
+    } else {
+      this.selectedIndex = -1;
+    }
+
+    this.games$.pipe(first()).subscribe(games => {
+      this.updateGames.emit(games);
     });
   }
 
@@ -96,5 +118,17 @@ export class GameSelectorComponent implements OnInit {
     this.games$.pipe(first()).subscribe(games => {
       this.selectedGame = games[args.index];
     });
+  }
+
+  onSwipeCellStarted(args) {
+    console.log('onSwipeCellStarted')
+  }
+
+  onSwipeCellFinished(args) {
+    console.log('onSwipeCellFinished')
+  }
+
+  onCellSwiping(args) {
+    console.log('onCellSwiping')
   }
 }
